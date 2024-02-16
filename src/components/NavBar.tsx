@@ -11,12 +11,18 @@ import { usePathname } from "next/navigation";
 import { clsx } from "clsx"
 import { Button } from "./ui/button";
 import { Drawer, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "./ui/drawer";
-import { Cart, CartTotal, LikeProduct } from "./ui/cart";
+import { Cart, CartTotal, LikeProduct, UserAvatar } from "./ui/cart-nav";
+import CartDropdown from "./ui/cart-dropdown";
+import { useContext } from "react";
+import { CartContext } from "@/app/context/cartContext";
+//import { CartContext } from "";
 
 
 
 export default function NavBar(){
     const pathname = usePathname();
+
+   const { cartCounter } = useContext(CartContext);
 
     return (
         <>
@@ -50,9 +56,9 @@ export default function NavBar(){
                 </div>
                 
                 <div className="flex gap-6 items-center">
+                       <UserAvatar />   
                     <LikeProduct />
-                    <Cart />
-                    <CartTotal />
+                    <CartDropdown />
                     
                     <Drawer>
                         <DrawerTrigger asChild>
@@ -71,11 +77,12 @@ export default function NavBar(){
                                             alt="Organi Logo"
                                             width={100}
                                             height={100}/>
-                                        <CircleUserRound color="black" size={30} />
+                                        <UserAvatar />
                                     </div>
                                     <div className="flex gap-4 items-center pt-4">
                                                 <LikeProduct />
-                                                <Cart />
+                                                <CartDropdown />
+                                                
                                     </div>
                                 </DrawerTitle>
                             </DrawerHeader>

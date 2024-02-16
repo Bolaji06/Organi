@@ -3,6 +3,13 @@ import { Inter } from 'next/font/google'
 import { Cairo } from 'next/font/google'
 import './globals.css'
 
+import AuthProvider from './context/authProvider'
+import NavBar from '@/components/NavBar'
+import { Toaster } from '@/components/ui/toaster'
+import Footer from '@/components/Footer'
+
+import { CartProvider } from '@/app/context/cartContext'
+
 const inter = Inter({ subsets: ['latin'] })
 const cairo = Cairo({ subsets: ['latin']})
 
@@ -18,7 +25,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cairo.className}>{children}</body>
+      <body className={cairo.className}>
+        <CartProvider>
+          <AuthProvider>
+            <div className='px-4 md:px-12'>
+              <NavBar />
+            </div>
+            {children}
+            <Footer />
+          </AuthProvider> 
+          </CartProvider>
+        <Toaster />
+      </body>
     </html>
   )
 }
