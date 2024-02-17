@@ -1,0 +1,134 @@
+'use client'
+
+import { createContext, useEffect, useState } from "react";
+
+export const CartContext = createContext(undefined);
+
+// List of function I will be needing
+// AddCart, RemoveFromcart, clearCart,
+// values: CartItem, TotalCartItems
+
+type ItemType = {
+    id: number,
+    title: string,
+    price: number,
+}
+type CartItemType = {
+    quantity: number,
+    item: {
+        id: number,
+        price: number,
+    }
+}
+const cartItemString = localStorage.getItem('cartItems');
+const initialCartItems = cartItemString ? JSON.parse(cartItemString) : [];
+
+const itemCartCounterString = localStorage.getItem('cart-counter');
+const initialCartCounter = itemCartCounterString ? JSON.parse(itemCartCounterString) : 0
+
+
+export function CartProvider({ children }: {children: React.ReactNode}){
+   
+    const [cartItems, setCartItems] = useState(initialCartItems);
+    const [cartCounter, setCartCounter] = useState(initialCartCounter);
+    const [productData, setProductData] = useState(null);
+
+   
+
+
+    function addToCart(item: ItemType){
+        const isItemInCart = cartItems.find((cartItem: CartItemType) => cartItem?.item?.id === item.id);
+
+        if (isItemInCart){
+            setCartItems(cartItems.map((cartItem : CartItemType) => cartItem?.item?.id === item.id ? {
+                cartItem,
+                quantity: cartItem.quantity + 1
+
+            } : cartItem))
+            
+        }else {
+            setCartItems([...cartItems, { item, quantity: 1 }])
+        }
+        setCartCounter(cartItems.length + 1);
+    }
+
+    function removeItemFromList(index: number){
+        const updatedCartItems = cartItems.filter((cartItem: CartItemType, cartItemIndex: number) => cartItemIndex !== index);
+        setCartItems(updatedCartItems);
+        setCartCounter(updatedCartItems.length);
+    }
+
+    function removeFromCart(item: ItemType){
+        const itemIndex: number = cartItems.findIndex((cartItem: CartItemType) => cartItem?.item?.id === item.id);
+
+        if (itemIndex !== -1) {
+            const newCartItems = [...cartItems]; // create new cart items
+            newCartItems.splice(itemIndex, 1); // Remove the item
+            setCartItems(newCartItems);
+            //setCartCounter(cartItems.length - 1);
+        } else {
+            // Item not in cart, handle accordingly
+        }
+    }
+
+    function checkIsItemInCart(item: CartItemType){
+        for (let cartItem of cartItems){
+            if (JSON.stringify(cartItem?.item) === JSON.stringify(item)) return true;
+        }
+        return false;
+    }
+
+    useEffect(() => {
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        localStorage.setItem('cart-counter', JSON.stringify(cartCounter));
+    }, [cartItems, cartCounter]);
+
+    useEffect(() => {
+        const isCartItem = localStorage.getItem('cartItems');
+        const isCartCounter = localStorage.getItem('cart-counter');
+        
+        if (isCartItem){
+            setCartItems(JSON.parse(isCartItem));
+        }
+        if (isCartCounter){
+            setCartCounter(JSON.parse(isCartCounter));
+        }
+    }, [])
+
+
+    function clearCart(){
+        const emptyCart: [] = [];
+        setCartItems(emptyCart);
+        setCartCounter(emptyCart.length);
+    }
+
+    function getTotalCartItems(){
+        if (cartItems.length !== 0){
+            const totalPriceItems = cartItems.reduce((total: number, item: { item: {price: number}}) => total + item?.item?.price * 100, 0);
+            return totalPriceItems;
+        }
+        return 0;
+    }
+
+
+    return (
+        <>
+            <CartContext.Provider value={{
+                cartItems,
+                cartCounter,
+                addToCart,
+                removeFromCart,
+                clearCart,
+                getTotalCartItems,
+                checkIsItemInCart,
+                productData,
+                setProductData,
+                removeItemFromList
+
+            }}>
+
+                { children }
+            </CartContext.Provider>
+        </>
+    )
+}
