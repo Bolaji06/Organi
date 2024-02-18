@@ -48,6 +48,7 @@ export default function SearchResult(){
                 {isLoading ? <div className="mb-2 flex justify-center items-center"><SvgSpinnersEclipse /></div> :
                  <div className="rounded-full w-40 mx-auto flex justify-center items-center text-center
                  bg-green-200 mt-1 mb-3 px-3">
+                    
                     <p className="text-base font-bold">Found {data?.products?.length} {data?.products?.length > 1 ? 'items' : 'item'} </p>
                 </div>}
                

@@ -1,4 +1,4 @@
-import { getAllCategories, getAllCategory } from "@/app/api/routes"
+import { getAllCategories } from "@/app/api/routes"
 
 import gadget from '../../public/assets/smartphones.webp';
 import jewlry from '../../public/assets/laptops.webp';

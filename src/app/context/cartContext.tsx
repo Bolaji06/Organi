@@ -125,7 +125,6 @@ export function CartProvider({ children }: {children: React.ReactNode}){
     function getTotalCartItems(){
         if (cartItems.length){
             const totalPriceItems = cartItems.reduce((total: number, item: { item: { price: number}}) => total + item.item.price * 100, 0);
-            console.log(totalPriceItems);
             return totalPriceItems
         }
         return 0;
