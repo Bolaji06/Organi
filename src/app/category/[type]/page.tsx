@@ -1,4 +1,4 @@
-import { getCategoryProduct, getCategoryProducts } from "@/app/api/routes";
+import { getCategoryProduct } from "@/app/api/routes";
 import NavBar from "@/components/NavBar";
 import Image from "next/image";
 
@@ -15,7 +15,7 @@ export default async function CategoryPage({ params } : { params: { type: string
     const productCategoryData = await getCategoryProduct(params.type);
     const products = productCategoryData?.products
 
-    const URIpath = decodeURI(params.type)
+    //const URIpath = decodeURI(params.type)
 
     return (
         <>

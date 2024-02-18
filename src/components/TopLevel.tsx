@@ -35,6 +35,7 @@ export default function TopLevel({ isContact }: { isContact: boolean }){
         }
         window.addEventListener('keydown', searchWithKey);
         return () => window.removeEventListener('keydown', searchWithKey);
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [searchText]);
 
     return (
