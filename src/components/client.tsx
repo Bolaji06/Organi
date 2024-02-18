@@ -1,21 +1,21 @@
 'use client'
 
-import { shopStore } from "@/app/store/shop-store"
 import { Button } from "./ui/button"
 import { ShoppingCart, Heart, Github } from "lucide-react"
-import useStore from "@/app/store/useStore"
 import { signIn } from "next-auth/react"
 import { useContext, useState } from "react"
 import Image from "next/image"
 import { useToast } from "./ui/use-toast";
-import { ProductType } from "./Product"
+import { ProductType } from "./Product";
+
 
 type CartBtnProps = {
     data: {},
 }
 
 // List of all NavBar Components
-export function GitHubLoginButton({ name, providerId}){
+// @ts-ignore
+export function GitHubLoginButton({ name, providerId }){
 
     return (
         <>
@@ -54,7 +54,8 @@ export function RemoveFromCart( {  data } : CartBtnProps){
     const { toast } = useToast();
     const { removeFromCart } = useContext(CartContext)
 
-    function handleAddToCart(){        
+    function handleAddToCart(){  
+        // @ts-ignore      
         removeFromCart(data);
         toast({
             variant: 'primary',

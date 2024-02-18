@@ -2,11 +2,22 @@
 
 import { createContext, useEffect, useState } from "react";
 
-export const CartContext = createContext({});
+interface CartContextType {
+    cartItems: any[]; // adjust type as per your cart item structure
+    cartCounter: number;
+    addToCart: (item: any) => void; // adjust type as per addToCart function signature
+    removeFromCart: (item: ItemType) => void; // adjust type as per removeFromCart function signature
+    clearCart: () => void;
+    getTotalCartItems: () => number;
+    checkIsItemInCart: (item: CartItemType) => boolean;
+    productData: any; // adjust type as per your product data structure
+    setProductData: (data: any) => void; // adjust type as per setProductData function signature
+    removeItemFromList: (index: number) => void; // adjust type as per removeItemFromList function signature
+    addToFavorite: (item: ItemType) => void; // adjust type as per addToFavorite function signature
+}
 
-// List of function I will be needing
-// AddCart, RemoveFromcart, clearCart,
-// values: CartItem, TotalCartItems
+
+export const CartContext = createContext<CartContextType>({} as CartContextType);
 
 type ItemType = {
     id: number,
@@ -85,7 +96,7 @@ export function CartProvider({ children }: {children: React.ReactNode}){
     useEffect(() => {
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
         localStorage.setItem('cart-counter', JSON.stringify(cartCounter));
-        localStorage.setItem('favorite', JSON.stringify(favoriteItems));
+       // localStorage.setItem('favorite', JSON.stringify(favoriteItems));
     }, [cartItems, cartCounter, favoriteItems]);
 
     useEffect(() => {
