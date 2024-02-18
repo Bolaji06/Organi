@@ -2,7 +2,7 @@
 
 import { createContext, useEffect, useState } from "react";
 
-export const CartContext = createContext(undefined);
+export const CartContext = createContext({});
 
 // List of function I will be needing
 // AddCart, RemoveFromcart, clearCart,
@@ -26,12 +26,16 @@ const initialCartItems = cartItemString ? JSON.parse(cartItemString) : [];
 const itemCartCounterString = localStorage.getItem('cart-counter');
 const initialCartCounter = itemCartCounterString ? JSON.parse(itemCartCounterString) : 0
 
+const favoriteItemsString = localStorage.getItem('favorite');
+const initialFavoriteList = favoriteItemsString ? JSON.parse(favoriteItemsString) : [];
+
 
 export function CartProvider({ children }: {children: React.ReactNode}){
    
     const [cartItems, setCartItems] = useState(initialCartItems);
     const [cartCounter, setCartCounter] = useState(initialCartCounter);
     const [productData, setProductData] = useState(null);
+    const [favoriteItems, setFavoriteItems] = useState(initialFavoriteList);
 
    
 
@@ -65,7 +69,7 @@ export function CartProvider({ children }: {children: React.ReactNode}){
             const newCartItems = [...cartItems]; // create new cart items
             newCartItems.splice(itemIndex, 1); // Remove the item
             setCartItems(newCartItems);
-            //setCartCounter(cartItems.length - 1);
+            setCartCounter(cartItems.length - 1);
         } else {
             // Item not in cart, handle accordingly
         }
@@ -81,17 +85,22 @@ export function CartProvider({ children }: {children: React.ReactNode}){
     useEffect(() => {
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
         localStorage.setItem('cart-counter', JSON.stringify(cartCounter));
-    }, [cartItems, cartCounter]);
+        localStorage.setItem('favorite', JSON.stringify(favoriteItems));
+    }, [cartItems, cartCounter, favoriteItems]);
 
     useEffect(() => {
         const isCartItem = localStorage.getItem('cartItems');
         const isCartCounter = localStorage.getItem('cart-counter');
+        const isFavorite = localStorage.getItem('favorite');
         
         if (isCartItem){
             setCartItems(JSON.parse(isCartItem));
         }
         if (isCartCounter){
             setCartCounter(JSON.parse(isCartCounter));
+        }
+        if (isFavorite){
+            setFavoriteItems(isFavorite);
         }
     }, [])
 
@@ -103,11 +112,16 @@ export function CartProvider({ children }: {children: React.ReactNode}){
     }
 
     function getTotalCartItems(){
-        if (cartItems.length !== 0){
-            const totalPriceItems = cartItems.reduce((total: number, item: { item: {price: number}}) => total + item?.item?.price * 100, 0);
-            return totalPriceItems;
+        if (cartItems.length){
+            const totalPriceItems = cartItems.reduce((total: number, item: { item: { price: number}}) => total + item.item.price * 100, 0);
+            console.log(totalPriceItems);
+            return totalPriceItems
         }
         return 0;
+    }
+
+    function addToFavorite(item: ItemType){
+        //setFavoriteItems([...item])
     }
 
 
@@ -123,7 +137,8 @@ export function CartProvider({ children }: {children: React.ReactNode}){
                 checkIsItemInCart,
                 productData,
                 setProductData,
-                removeItemFromList
+                removeItemFromList,
+                addToFavorite,
 
             }}>
 

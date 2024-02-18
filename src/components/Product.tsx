@@ -32,6 +32,7 @@ export default function Product( { data } : { data: ProductType}){
 
    useEffect(() => {
     setProductData(data);
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [data]);
 
     return (
@@ -72,7 +73,7 @@ export default function Product( { data } : { data: ProductType}){
                                     </div>
 
                                     <div className="description py-2 border-b-2 border-slate-100">
-                                        <p>{description}</p>
+                                        <p className="first-letter:capitalize">{description}</p>
                                     </div>
 
                                     <div className="flex justify-between items-center mt-4">

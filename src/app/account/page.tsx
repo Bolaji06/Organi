@@ -1,11 +1,11 @@
 import NavBar from "@/components/NavBar";
 
-import { options } from "../api/auth/[...nextauth]/options";
+import { nextAuthOptions } from "../api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 export default async function UserPage(){
-   const session = await getServerSession(options);
+   const session = await getServerSession(nextAuthOptions);
   // const userImage = session?.user?.image
 
 //    if (!session){

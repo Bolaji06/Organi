@@ -73,12 +73,24 @@ export function RemoveFromCart( {  data } : CartBtnProps){
     )
 }
 
-export function AddToFavoriteButton( ) {
+export function AddToFavoriteButton() {
+    const [toggle, setToggle] = useState(false);
+    const { addToFavorite, productData } = useContext(CartContext);
+
+
+    const handleToggle = () => {
+        if (!toggle){
+            addToFavorite(productData);
+        }
+        setToggle((curState) => !curState);
+        
+    }
+   
    
     return (
         <>
-            <Button className="bg-transparent">
-                <Heart size={25} color="green" fill="green"/>
+            <Button onClick={handleToggle} className={`bg-transparent ${clsx(toggle ? 'animate-like-anim' : null)}`}>
+                <Heart size={25} color="green" fill={`${clsx(toggle ? 'green': 'transparent')}`}/>
             </Button>
         </>
     )
@@ -131,6 +143,7 @@ import React from 'react';
 import type { SVGProps } from 'react';
 import { ToastAction } from "./ui/toast"
 import { CartContext } from "@/app/context/cartContext"
+import clsx from "clsx"
 
 export function SvgSpinnersEclipse(props: SVGProps<SVGSVGElement>) {
 	return (<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24" {...props}><path fill="#7fad39" d="M2,12A11.2,11.2,0,0,1,13,1.05C12.67,1,12.34,1,12,1a11,11,0,0,0,0,22c.34,0,.67,0,1-.05C6,23,2,17.74,2,12Z"><animateTransform attributeName="transform" dur="0.6s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"></animateTransform></path></svg>);

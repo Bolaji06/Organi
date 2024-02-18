@@ -41,6 +41,7 @@ export function HeroCarousel({ autoScroll = false }){
         if (!autoScroll) return;
         const interval = setInterval(next, 5000)
         return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // style={{backgroundImage: `url(${carouselHero[currentSlide].url.src})`}}
@@ -99,6 +100,7 @@ export function AdsCarousel({ autoScroll = false, slides } : Carousel){
         if (!autoScroll) return;
         const interval = setInterval(autoScrollSlide, 4000)
         return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -110,7 +112,7 @@ export function AdsCarousel({ autoScroll = false, slides } : Carousel){
                          return <Image 
                                     key={index}
                                     className="w-full object-cover h-60 "
-                                    src={slides[currentSlide]}
+                                    src={slides[currentSlide].src}
                                     width={1000}
                                     height={1000}
                                     alt="Jelwery Ads Banner"/>

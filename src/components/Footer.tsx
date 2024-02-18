@@ -32,7 +32,7 @@ We pride ourselves in having everything you could possibly need
          When you shop on our platform, you can pay with your debit card, 
          which is a convenient and secured payment solution.
           Get the best of lifestyle services online. 
-          Don't miss out on the biggest sales online 
+          Don&apos;t miss out on the biggest sales online 
           which takes place on special dates yearly.
                     </p>
                 </div>
