@@ -27,24 +27,24 @@ type CartItemType = {
         images: Array<string>
     }
 }
-const cartItemString = localStorage.getItem('cartItems');
-const initialCartItems = cartItemString ? JSON.parse(cartItemString) : [];
-
-const itemCartCounterString = localStorage.getItem('cart-counter');
-const initialCartCounter = itemCartCounterString ? JSON.parse(itemCartCounterString) : 0
-
-const favoriteItemsString = localStorage.getItem('favorite');
-const initialFavoriteList = favoriteItemsString ? JSON.parse(favoriteItemsString) : [];
 
 
 export function CartProvider({ children }: {children: React.ReactNode}){
+
+    const cartItemString = typeof window !== 'undefined' ? localStorage.getItem('cartItems') : null;
+    const initialCartItems = cartItemString ? JSON.parse(cartItemString) : [];
+
+    const itemCartCounterString = typeof window !== 'undefined' ? localStorage.getItem('cart-counter') : null;
+    const initialCartCounter = itemCartCounterString ? JSON.parse(itemCartCounterString) : 0
+
+    const favoriteItemsString = typeof window !== 'undefined' ? localStorage.getItem('favorite') : null;
+    const initialFavoriteList = favoriteItemsString ? JSON.parse(favoriteItemsString) : [];
+
    
-    const [cartItems, setCartItems] = useState(initialCartItems);
+    const [cartItems, setCartItems] = useState(initialCartItems );
     const [cartCounter, setCartCounter] = useState(initialCartCounter);
     const [productData, setProductData] = useState(null);
     const [favoriteItems, setFavoriteItems] = useState(initialFavoriteList);
-
-   
 
 
     function addToCart(item: ItemType){
