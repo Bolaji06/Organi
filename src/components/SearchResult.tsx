@@ -11,9 +11,10 @@ import Link from "next/link";
 
 import noResult from '../../public/assets/no result.png'
 import { Button } from "./ui/button";
+import { ISearchProduct } from "@/lib/definitions";
 
 export default function SearchResult(){
-    const [data, setData] = useState<null>(null);
+    const [data, setData] = useState<ISearchProduct | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState("");
 
@@ -49,7 +50,7 @@ export default function SearchResult(){
                  <div className="rounded-full w-40 mx-auto flex justify-center items-center text-center
                  bg-green-200 mt-1 mb-3 px-3">
                     
-                    <p className="text-base font-bold">Found {data?.products?.length} {data?.products?.length > 1 ? 'items' : 'item'} </p>
+                    <p className="text-base font-bold">Found {data?.products?.length} {(data?.products?.length ?? 0) > 1 ? 'items' : 'item'} </p>
                 </div>}
                
                {!data?.products?.length ? <div className="flex flex-col justify-center items-center">

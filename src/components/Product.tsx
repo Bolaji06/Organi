@@ -10,25 +10,16 @@ import clsx from "clsx";
 
 import { useContext, useEffect } from "react";
 import { CartContext } from "@/app/context/cartContext";
+import { IProduct } from "@/lib/definitions";
 
 
-export type ProductType = {
-    title: string,
-    price: number,
-    description: string,
-    category: string,
-    images: [],
-    rating: number,
-    stock: number,
-    discountPercentage: number,
-}
-
-export default function Product( { data } : { data: ProductType}){
-    const { title, price, description, category, images, rating, stock, discountPercentage: discount} = data;
+export default function Product({ data } : { data: IProduct}){
+    const { title, price, description, category, images,
+         rating, stock, discountPercentage: discount} = data;
 
     const priceDiscount = getCurrencySign(getDiscountPrice(price, discount));
 
-    const { addToCart, checkIsItemInCart, setProductData} = useContext(CartContext);
+    const { checkIsItemInCart, setProductData } = useContext(CartContext);
 
    useEffect(() => {
     setProductData(data);
@@ -77,14 +68,13 @@ export default function Product( { data } : { data: ProductType}){
                                     </div>
 
                                     <div className="flex justify-between items-center mt-4">
-                                        <AddToFavoriteButton 
-                                            addToCart={addToCart}
-                                            product={data}/>
+                                                
+                                        <AddToFavoriteButton />
                                         {checkIsItemInCart(data) ? 
                                             <RemoveFromCart 
                                                 data={data}/> : 
                                             <AddToCartButton 
-                                                data={data}/> 
+                                                data={data}/>  
                                         }
                                     </div>
                                 </div>

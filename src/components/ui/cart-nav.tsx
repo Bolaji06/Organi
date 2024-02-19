@@ -1,18 +1,12 @@
 'use client';
 
-import { shopStore } from "@/app/store/shop-store";
-import useStore from "@/app/store/useStore";
 import { ShoppingCart, Heart, CircleUserRound } from "lucide-react"
 import Image from "next/image";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./hover-card";
 import { Button } from "./button";
-
 import { signIn, signOut, useSession } from 'next-auth/react'
-import { useToast } from "./use-toast";
-import { title } from "process";
 import { useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
-import Link from 'next/link';
 import { CartContext } from "@/app/context/cartContext";
 
 export function Cart(){

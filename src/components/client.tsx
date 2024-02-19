@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react"
 import { useContext, useState } from "react"
 import Image from "next/image"
 import { useToast } from "./ui/use-toast";
-import { ProductType } from "./Product";
+
 
 
 type CartBtnProps = {
@@ -97,7 +97,7 @@ export function AddToFavoriteButton() {
     )
 }
 
-export function ProductImageSwitch({ images }: { images: []}){
+export function ProductImageSwitch({ images }: { images: Array<string>}){
     const [curIndex, setCurIndex] = useState(0);
 
    return (

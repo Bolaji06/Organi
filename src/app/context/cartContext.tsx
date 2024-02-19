@@ -1,20 +1,7 @@
 'use client'
 
+import { IProduct, CartContextType } from "@/lib/definitions";
 import { createContext, useEffect, useState } from "react";
-
-interface CartContextType {
-    cartItems: any[]; // adjust type as per your cart item structure
-    cartCounter: number;
-    addToCart: (item: any) => void; // adjust type as per addToCart function signature
-    removeFromCart: (item: ItemType) => void; // adjust type as per removeFromCart function signature
-    clearCart: () => void;
-    getTotalCartItems: () => number;
-    checkIsItemInCart: (item: CartItemType) => boolean;
-    productData: any; // adjust type as per your product data structure
-    setProductData: (data: any) => void; // adjust type as per setProductData function signature
-    removeItemFromList: (index: number) => void; // adjust type as per removeItemFromList function signature
-    addToFavorite: (item: ItemType) => void; // adjust type as per addToFavorite function signature
-}
 
 
 export const CartContext = createContext<CartContextType>({} as CartContextType);
@@ -25,10 +12,19 @@ type ItemType = {
     price: number,
 }
 type CartItemType = {
-    quantity: number,
+    //quantity: number,
     item: {
         id: number,
+        title: string,
+        description: string,
         price: number,
+        discountPercentage: number,
+        rating: number,
+        stock: number,
+        brand: string,
+        category: string,
+        thumbnail: string,
+        images: Array<string>
     }
 }
 const cartItemString = localStorage.getItem('cartItems');
@@ -57,7 +53,7 @@ export function CartProvider({ children }: {children: React.ReactNode}){
         if (isItemInCart){
             setCartItems(cartItems.map((cartItem : CartItemType) => cartItem?.item?.id === item.id ? {
                 cartItem,
-                quantity: cartItem.quantity + 1
+                //quantity: cartItem.quantity + 1
 
             } : cartItem))
             
@@ -86,7 +82,7 @@ export function CartProvider({ children }: {children: React.ReactNode}){
         }
     }
 
-    function checkIsItemInCart(item: CartItemType){
+    function checkIsItemInCart(item: IProduct){
         for (let cartItem of cartItems){
             if (JSON.stringify(cartItem?.item) === JSON.stringify(item)) return true;
         }

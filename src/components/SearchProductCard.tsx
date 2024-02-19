@@ -7,7 +7,7 @@ import clsx from "clsx"
 import { match } from "assert"
 
 type SProductDetails = {
-    image: string,
+    image: Array<string>,
     title: string,
     description?: string,
     price: number,
