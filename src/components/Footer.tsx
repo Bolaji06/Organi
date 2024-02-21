@@ -47,8 +47,8 @@ We pride ourselves in having everything you could possibly need
                             
                         </div>
 
-                        <div className="flex items-center gap-3">
-                             <div className="p-3 rounded-full bg-slate-500">
+                        <div className="flex items-center gap-2">
+                             <div className="p-2 rounded-full bg-slate-500">
                                 <PhoneCall color="white" size={22}/>
                             </div>
                             <h2 className="font-bold">+234 479 8291</h2>

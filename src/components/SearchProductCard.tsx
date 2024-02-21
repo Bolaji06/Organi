@@ -53,9 +53,9 @@ export default function SearchProductCard({ image, title, description,
                         </div>
                         <div className="mt-2">
                             <p className="text-sm py-1 leading-6">{description}</p>
-                            <div className="flex gap-4 mt-3">
+                            <div className="flex items-center gap-2 mt-3">
                                 <TagCount rate={rating} />
-                                <p>{stock} units in stock</p>
+                                <p className="text-sm">{stock} units in stock</p>
                             </div>
                         </div>
                     </div>

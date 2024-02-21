@@ -25,7 +25,9 @@ export default async function AllProduct(){
          laptopsDeals, woemenDressDeals, womenJewlleryDeals, womenBagsDeals, menDressDeals,
         menShoesDeals, menWatchDeals]);
 
-    // rgba(91, 48, 2, 1)
+    const styles = {
+        gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+    }
 
     return (
         <>
@@ -33,12 +35,14 @@ export default async function AllProduct(){
                 <Carpet 
                     title="Smartphones Top Deals"
                     bgColor='1, 62, 255'>
-                        <div className="flex flex-wrap gap-2 md:items-center item-center md:justify-evenly">
+                        <div className="grid gap-3"
+                            style={styles}>
                         {
                             smartphones?.products?.map((item:any) => {
                                return(
                                 <Link key={item.id}
-                                    href={`/product-details/${item.id}`}> 
+                                    href={`/product-details/${item.id}`}
+                                    className=""> 
                                     <ProductCard 
                                         id={item.id}
                                         title={item.title}
@@ -46,6 +50,7 @@ export default async function AllProduct(){
                                         image={item.images[0]}
                                         rate={item.rating}
                                         discount={item.discountPercentage}
+                                        className=""
                                     />
                                 </Link>)
                             })
@@ -56,7 +61,8 @@ export default async function AllProduct(){
                 <Carpet 
                     title="Winter-Tops Deals"
                     bgColor='255, 0, 0'>
-                        <div className="flex flex-wrap gap-2 md:items-center item-center md:justify-evenly">
+                         <div className="grid gap-3"
+                            style={styles}>
                         {
                             tops?.products?.map((item:any) => {
                                return(
@@ -81,7 +87,8 @@ export default async function AllProduct(){
                 <Carpet 
                     title="Best Laptop Deals"
                     bgColor='128, 0, 255'>
-                        <div className="flex flex-wrap gap-2 md:items-center item-center md:justify-evenly">
+                         <div className="grid gap-3"
+                            style={styles}>
                         {
                             laptops?.products?.map((item:any) => {
                                return(
@@ -103,7 +110,8 @@ export default async function AllProduct(){
                                 <Carpet 
                                     title="Women Fashion Deals"
                                     bgColor='255, 0, 168'>
-                        <div className="flex items-center flex-wrap lg:grid lg:grid-cols-6 gap-3">
+                         <div className="grid gap-3"
+                            style={styles}>
                             {
                                 womenDress?.products?.map((item:any) => {
                                 return(
@@ -158,7 +166,8 @@ export default async function AllProduct(){
                 <Carpet 
                     title="Men Mega Deals"
                     bgColor='91, 48, 2'>
-                        <div className="flex items-center flex-wrap lg:grid lg:grid-cols-6 gap-3">
+                         <div className="grid gap-3"
+                            style={styles}>
                         {
                             menDress?.products?.map((item:any) => {
                                return(

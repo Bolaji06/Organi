@@ -27,7 +27,8 @@ export default async function CategoryPage({ params } : { params: { type: string
                     </section>
                        
 
-                        <main className="flex justify-center items-start lg:justify-evenly flex-wrap gap-4 my-20">
+                        <main className="grid gap-4 my-14 " 
+                        style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))'}}>
                             {
                                 products.map((product: any) => {
                                     return (
