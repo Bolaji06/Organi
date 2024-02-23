@@ -11,6 +11,12 @@ export interface CartContextType {
     setProductData: (data: any) => void; // adjust type as per setProductData function signature
     removeItemFromList: (index: number) => void; // adjust type as per removeItemFromList function signature
     addToFavorite: (item: IProduct) => void; // adjust type as per addToFavorite function signature
+    checkIsItemInFavorite: (item: IProduct) => boolean;
+    removeFromFavorite: (item: IProduct) => void;
+    favoriteCounter: number,
+    favoriteItems: [],
+    clearFavorite: () => void,
+    removeFromFavoriteList: (index: number) => void,
 }
 
 export interface ISearchProduct {

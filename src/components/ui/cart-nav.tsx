@@ -42,18 +42,18 @@ export function CartTotal(){
 }
 
 export function LikeProduct(){
-    //const favourite = useStore((state) => state.favouriteCounter)
-    const favourite = 1
-
+    const { favoriteCounter } = useContext(CartContext)
+    
     return (
         <>
             <div className="liked-product relative">
-                        <Heart size={20}/>
-                        { favourite > 0 &&
+
+                        <Heart size={20} color="black"/>
+                        {
                             (<div className="count text-center absolute bg-primary w-4 h-4 rounded-full
                             -top-2 -right-3">
                                 <p className="text-white text-xs text-center 
-                                font-extrabold">0</p>
+                                font-extrabold">{favoriteCounter}</p>
                         </div>)}
             </div>
         </>

@@ -15,14 +15,13 @@ import { Cart, CartTotal, LikeProduct, UserAvatar } from "./ui/cart-nav";
 import CartDropdown from "./ui/cart-dropdown";
 import { useContext } from "react";
 import { CartContext } from "@/app/context/cartContext";
+import LikeDropdowmn from "./ui/like-dropdown";
 //import { CartContext } from "";
 
 
 
 export default function NavBar(){
     const pathname = usePathname();
-
-   const { cartCounter } = useContext(CartContext);
 
     return (
         <>
@@ -57,7 +56,7 @@ export default function NavBar(){
                 
                 <div className="flex gap-6 items-center">
                        <UserAvatar />   
-                    <LikeProduct />
+                    <LikeDropdowmn />
                     <CartDropdown />
                     
                     <Drawer>
@@ -81,7 +80,7 @@ export default function NavBar(){
                                     </div>
                                     <div className="flex gap-4 items-center pt-4">
                                                 <LikeProduct />
-                                                <CartDropdown />
+                                                {/* <CartDropdown /> */}
                                                 
                                     </div>
                                 </DrawerTitle>

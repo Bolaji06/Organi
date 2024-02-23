@@ -45,9 +45,11 @@ export function CartProvider({ children }: {children: React.ReactNode}){
     const [cartCounter, setCartCounter] = useState(initialCartCounter);
     const [productData, setProductData] = useState(null);
     const [favoriteItems, setFavoriteItems] = useState(initialFavoriteList);
+    const [favoriteCounter, setFavoriteCounter] = useState(0);
 
 
     function addToCart(item: ItemType){
+
         const isItemInCart = cartItems.find((cartItem: CartItemType) => cartItem?.item?.id === item.id);
 
         if (isItemInCart){
@@ -67,6 +69,11 @@ export function CartProvider({ children }: {children: React.ReactNode}){
         const updatedCartItems = cartItems.filter((cartItem: CartItemType, cartItemIndex: number) => cartItemIndex !== index);
         setCartItems(updatedCartItems);
         setCartCounter(updatedCartItems.length);
+    }
+    function removeFromFavoriteList(index: number){
+        const updatedFavoriteItems = favoriteItems.filter((item: IProduct, favoriteIndex: number) => favoriteIndex !== index);
+        setFavoriteItems(updatedFavoriteItems)
+        //return updatedFavoriteItems;
     }
 
     function removeFromCart(item: ItemType){
@@ -92,7 +99,8 @@ export function CartProvider({ children }: {children: React.ReactNode}){
     useEffect(() => {
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
         localStorage.setItem('cart-counter', JSON.stringify(cartCounter));
-       // localStorage.setItem('favorite', JSON.stringify(favoriteItems));
+        localStorage.setItem('favorite', JSON.stringify(favoriteItems));
+        setFavoriteCounter(favoriteItems?.length)
     }, [cartItems, cartCounter, favoriteItems]);
 
     useEffect(() => {
@@ -107,7 +115,7 @@ export function CartProvider({ children }: {children: React.ReactNode}){
             setCartCounter(JSON.parse(isCartCounter));
         }
         if (isFavorite){
-            setFavoriteItems(isFavorite);
+            setFavoriteItems(JSON.parse(isFavorite));
         }
     }, [])
 
@@ -120,15 +128,42 @@ export function CartProvider({ children }: {children: React.ReactNode}){
 
     function getTotalCartItems(){
         if (cartItems.length){
-            const totalPriceItems = cartItems.reduce((total: number, item: { item: { price: number}}) => total + item.item.price * 100, 0);
+            const totalPriceItems = cartItems.reduce((total: number, item: { item: { price: number}}) => total + item?.item?.price * 100, 0);
             return totalPriceItems
         }
         return 0;
     }
 
     function addToFavorite(item: ItemType){
-        //setFavoriteItems([...item])
+       setFavoriteItems((prevState: ItemType[]) => {
+        const isItemInFavorite = prevState.some(favItem => JSON.stringify(favItem) === JSON.stringify(item));
+        if (!isItemInFavorite){
+            return [...prevState, item];
+        }
+       })
     }
+    function removeFromFavorite(item: ItemType){
+        if (favoriteItems){
+            const updatedFavoriteItem = favoriteItems.filter((favItem: ItemType) => favItem !== item)
+            setFavoriteItems(updatedFavoriteItem);
+        }else {
+            return [];
+        }
+    }
+    function checkIsItemInFavorite(item: ItemType): boolean{
+        if (favoriteItems){
+          for (let favItem of favoriteItems){
+                if (JSON.stringify(favItem) === JSON.stringify(item)) return true;
+            }
+        }
+        return false;    
+    }
+    function clearFavorite(){
+        const emptyFavorite: [] = [];
+        setFavoriteItems(emptyFavorite);
+    }
+   
+    
 
 
     return (
@@ -145,6 +180,12 @@ export function CartProvider({ children }: {children: React.ReactNode}){
                 setProductData,
                 removeItemFromList,
                 addToFavorite,
+                checkIsItemInFavorite,
+                removeFromFavorite,
+                favoriteCounter,
+                favoriteItems,
+                clearFavorite,
+                removeFromFavoriteList,
 
             }}>
 

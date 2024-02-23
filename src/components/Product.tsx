@@ -39,7 +39,7 @@ export default function Product({ data } : { data: IProduct}){
                                         images={images}/>
                                 </div>
 
-                                <div className="basis-[60%] mt-6 pr-10">
+                                <div className="basis-[60%] mt-6 pr-4 md:pr-10">
                                     <div className="title border-b-2 border-b-slate-100 pb-2">
                                         <p className="text-lg font-medium capitalize">{title}</p>
                                         <div className="py-3 flex items-center gap-6">
@@ -53,14 +53,17 @@ export default function Product({ data } : { data: IProduct}){
 
                                     </div>
 
-                                    <div className="price border-b-2 border-b-slate-100 py-2 flex items-center gap-8 ">
+                                    <div className="price border-b-2 border-b-slate-100 py-2 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8 ">
                                         
                                         {discount && <p className="font-bold text-lg lg:text-2xl">{priceDiscount}</p>}
-                                        <p className={`font-bold text-lg lg:text-2xl ${clsx({'line-through text-gray-300 text-lg lg:text-2xl': discount !== null})}`}>{getCurrencySign(price * 100)}</p>
-                                         {discount && 
-                                        <div className="p-1 text-center text-xs text-white bg-red-500 rounded-sm">
-                                            <p>{`-${Math.round(discount)}%`}</p>
-                                        </div>} 
+                                        
+                                        <div className="flex gap-5 items-center">
+                                            <p className={`font-bold text-lg lg:text-2xl ${clsx({'line-through text-gray-300 text-lg lg:text-2xl': discount !== null})}`}>{getCurrencySign(price * 100)}</p>
+                                            {discount && 
+                                            <div className="p-1 text-center text-xs text-white bg-red-500 rounded-sm">
+                                                <p>{`-${Math.round(discount)}%`}</p>
+                                            </div>}
+                                        </div>
                                     </div>
 
                                     <div className="description py-2 border-b-2 border-slate-100">

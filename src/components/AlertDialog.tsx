@@ -15,9 +15,17 @@ import {
   import { Button } from "@/components/ui/button"
 import { useContext } from "react"
 
+interface IDialog {
+  action: () => void,
+  title: string,
+  description: string,
+}
+
+//This action cannot be undone. This will permanently 
+             // remove all items from your cart.
   
-  export function AlertDialogPopOver() {
-    const { clearCart } = useContext(CartContext);
+  export function AlertDialogPopOver({ action, title, description} : IDialog) {
+    //const { clearCart } = useContext(CartContext);
     return (
       <AlertDialog>
         <AlertDialogTrigger asChild>
@@ -25,15 +33,14 @@ import { useContext } from "react"
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Clear Cart?</AlertDialogTitle>
+            <AlertDialogTitle>{title}</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently 
-              remove all items from your cart.
+              {description}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={() => clearCart()} className="bg-red-600">Clear all</AlertDialogAction>
+            <AlertDialogAction onClick={() => action()} className="bg-red-600">Clear all</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

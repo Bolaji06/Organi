@@ -44,19 +44,18 @@ export function HeroCarousel({ autoScroll = false }){
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // style={{backgroundImage: `url(${carouselHero[currentSlide].url.src})`}}
-
     return (
         <>
             {
                 <section className='w-full
-                    bg-cover bg-center bg-no-repeat transition-transform duration-75 ease-out relative'>
-                        <Link href={'/#shop'}><Image 
-                            src={carouselHero[currentSlide].url}
-                            alt='Hero Ads'
-                            width={500}
-                            height={500}
-                            className='object-cover w-full h-[500px]'/>
+                    bg-cover bg-center bg-no-repeat relative'>
+                        <Link href={'/#shop'}>
+                            <Image 
+                                src={carouselHero[currentSlide].url}
+                                alt='Hero Ads'
+                                width={500}
+                                height={500}
+                                className='object-cover w-full h-[500px] transition-all ease-in-out duration-75'/>
                         </Link>
 
                         <div className='flex items-center justify-between absolute w-full left-1/2 top-1/2
@@ -76,8 +75,8 @@ export function HeroCarousel({ autoScroll = false }){
                          -translate-x-1/2 bottom-10'>
                             {
                                 carouselHero.map((dot, index) => {
-                                    return <div key={index} className={`w-2 h-2 rounded-full transition-all
-                                    ${clsx('bg-slate-600', {'bg-green-500 px-2' : currentSlide === index})}`}></div>
+                                    return <div key={index} className={`w-2 h-2 rounded-full transition-all bg-slate-600
+                                    ${clsx( {'bg-green-600 px-2' : currentSlide === index})}`}></div>
                                 })
                             }
                             

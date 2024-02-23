@@ -54,7 +54,7 @@ export function RemoveFromCart( {  data } : CartBtnProps){
     const { toast } = useToast();
     const { removeFromCart } = useContext(CartContext)
 
-    function handleAddToCart(){  
+    function handleRemoveFromCart(){  
         // @ts-ignore      
         removeFromCart(data);
         toast({
@@ -66,7 +66,7 @@ export function RemoveFromCart( {  data } : CartBtnProps){
     }
     return (
         <>
-            <Button onClick={handleAddToCart} className="bg-primary uppercase font-semibold group">
+            <Button onClick={handleRemoveFromCart} className="bg-primary uppercase font-semibold group">
                 <ShoppingCart className="mr-4 group-hover:rotate-180 transition-rotate duration-700 ease-in-out"/> Remove from cart
             </Button>
             
@@ -76,22 +76,24 @@ export function RemoveFromCart( {  data } : CartBtnProps){
 
 export function AddToFavoriteButton() {
     const [toggle, setToggle] = useState(false);
-    const { addToFavorite, productData } = useContext(CartContext);
+    const { addToFavorite, productData, checkIsItemInFavorite, removeFromFavorite } = useContext(CartContext);
 
 
     const handleToggle = () => {
         if (!toggle){
             addToFavorite(productData);
+        }else {
+            removeFromFavorite(productData);
         }
-        setToggle((curState) => !curState);
-        
+        setToggle((curState) => !curState);   
     }
+    const isItemInFavorite = checkIsItemInFavorite(productData);
    
    
     return (
         <>
             <Button onClick={handleToggle} className={`bg-transparent ${clsx(toggle ? 'animate-like-anim' : null)}`}>
-                <Heart size={25} color="green" fill={`${clsx(toggle ? 'green': 'transparent')}`}/>
+                <Heart size={25} color="green" fill={`${clsx(isItemInFavorite ? 'green': 'transparent')}`}/>
             </Button>
         </>
     )
