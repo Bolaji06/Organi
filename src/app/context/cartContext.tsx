@@ -179,6 +179,7 @@ export function CartProvider({ children }: {children: React.ReactNode}){
         if (isRecentProduct){
             setRecentViewedProducts(JSON.parse(isRecentProduct));
         }
+        
     }, [])
    
     return (

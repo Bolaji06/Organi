@@ -5,10 +5,10 @@ import { deliveryService, getCurrencySign, getDiscountPrice, location } from "@/
 import TagCount from "@/components/ui/tag";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-import { AddToCartButton, AddToFavoriteButton, ProductImageSwitch, RemoveFromCart } from "@/components/client";
+import { AddToCartButton, AddToFavoriteButton, ProductImageSwitch, RemoveFromCart, SvgSpinnersEclipse } from "@/components/client";
 import clsx from "clsx";
 
-import { useContext, useEffect } from "react";
+import { Suspense, useContext, useEffect, useState } from "react";
 import { CartContext } from "@/app/context/cartContext";
 import { IProduct } from "@/lib/definitions";
 
@@ -21,6 +21,13 @@ export default function Product({ data } : { data: IProduct}){
 
     const { checkIsItemInCart, setProductData } = useContext(CartContext);
 
+
+    const [hasMount, setHasMount] = useState(false);
+
+    useEffect(() => {
+        setHasMount(true);
+    }, [])
+
    useEffect(() => {
     setProductData(data);
    // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -29,7 +36,6 @@ export default function Product({ data } : { data: IProduct}){
     return (
         <>
             <main>
-            
                 <section className="px-4 pt-1 pb-12">
                     <div className="flex justify-between gap-10 flex-col lg:flex-row">
                         <div className="basis-[70%] shadow-md px-4 py-6 bg-white rounded-md">
@@ -73,12 +79,15 @@ export default function Product({ data } : { data: IProduct}){
                                     <div className="flex justify-between items-center mt-4">
                                                 
                                         <AddToFavoriteButton />
-                                        {checkIsItemInCart(data) ? 
-                                            <RemoveFromCart 
-                                                data={data}/> : 
-                                            <AddToCartButton 
-                                                data={data}/>  
-                                        }
+                                       { hasMount ? <div>
+                                            {checkIsItemInCart(data) ? 
+                                                <RemoveFromCart 
+                                                    data={data}/> : 
+                                                <AddToCartButton 
+                                                    data={data}/>  
+                                            } 
+                                        </div> : <SvgSpinnersEclipse />}
+                                        
                                     </div>
                                 </div>
                                

@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from "react"
 import { Button } from "./ui/button"
 import { ShoppingCart, Heart, Github } from "lucide-react"
 import { signIn } from "next-auth/react"
@@ -31,6 +32,7 @@ export function AddToCartButton({ data } : CartBtnProps){
     const { toast } = useToast();
     const { addToCart } = useContext(CartContext)
 
+
     function handleAddToCart(){        
         addToCart(data);
         toast({
@@ -42,15 +44,15 @@ export function AddToCartButton({ data } : CartBtnProps){
     }
     return (
         <>
-            <Button onClick={handleAddToCart} className="bg-primary uppercase font-semibold group">
+           <Button onClick={handleAddToCart} className="bg-primary uppercase font-semibold group">
                 <ShoppingCart className="mr-4 group-hover:animate-bounce"/> Add to cart
-            </Button>
+            </Button> 
             
         </>
     )
 }
 
-export function RemoveFromCart( {  data } : CartBtnProps){
+export function RemoveFromCart({  data } : CartBtnProps){
     const { toast } = useToast();
     const { removeFromCart } = useContext(CartContext)
 
