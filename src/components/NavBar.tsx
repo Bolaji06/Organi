@@ -5,18 +5,17 @@ import Link from "next/link";
 import logo from "../../public/logo.png.webp"
 
 import { links } from "@/lib/links";
-import { CircleUserRound, Heart, MenuSquare, MessagesSquareIcon, PersonStanding, ShoppingBag, ShoppingCart } from "lucide-react";
+import { MenuSquare, MessagesSquareIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { clsx } from "clsx"
 import { Button } from "./ui/button";
-import { Drawer, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "./ui/drawer";
-import { Cart, CartTotal, LikeProduct, UserAvatar } from "./ui/cart-nav";
+import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "./ui/drawer";
+import { LikeProduct, UserAvatar } from "./ui/cart-nav";
 import CartDropdown from "./ui/cart-dropdown";
-import { useContext } from "react";
-import { CartContext } from "@/app/context/cartContext";
+
 import LikeDropdowmn from "./ui/like-dropdown";
-//import { CartContext } from "";
+
 
 
 

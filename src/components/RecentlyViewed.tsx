@@ -5,7 +5,6 @@ import { IProduct } from "@/lib/definitions";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react"
 import { ProductCard } from "./ProductCard";
-import styles from './styles.module.css';
 
 export default function RecentlyViewedProduct(){
     const [recentData, setRecentData] = useState([]);
