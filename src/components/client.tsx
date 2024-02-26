@@ -127,8 +127,8 @@ export function ProductImageSwitch({ images }: { images: Array<string>}){
                                 width={100}
                                 height={100}
                                 onClick={() => setCurIndex(index)}
-                                className="mt-6 w-8 aspect-square
-                                hover:border cursor-pointer 
+                                className="mt-6 w-8 rounded-md aspect-square
+                                hover:border-2 cursor-pointer 
                                  hover:border-gray-700"/>
                             </div>
                             

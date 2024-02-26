@@ -6,6 +6,7 @@ import Loading from "./loading";
 
 import Breadcrumbs from "@/components/breadcrumbs";
 import Product from "@/components/Product";
+import RecentlyViewedProduct from "@/components/RecentlyViewed";
 
 
 export default async function ProductDetailsPage({ params } : { params: { id: number }}){
@@ -34,6 +35,8 @@ export default async function ProductDetailsPage({ params } : { params: { id: nu
                 <Suspense fallback={<Loading />}>
                     <Product data={productData}/>
                 </Suspense>
+
+                <RecentlyViewedProduct />
                 
             </main>
         </>

@@ -28,24 +28,30 @@ type CartItemType = {
     }
 }
 
+const cartItemString = typeof window !== 'undefined' ? localStorage.getItem('cartItems') : null;
+const initialCartItems = cartItemString ? JSON.parse(cartItemString) : [];
+
+const itemCartCounterString = typeof window !== 'undefined' ? localStorage.getItem('cart-counter') : null;
+const initialCartCounter = itemCartCounterString ? JSON.parse(itemCartCounterString) : 0
+
+const favoriteItemsString = typeof window !== 'undefined' ? localStorage.getItem('favorite') : null;
+const initialFavoriteList = favoriteItemsString ? JSON.parse(favoriteItemsString) : [];
+
+const favoriteItemCounterString = typeof window !== 'undefined' ? localStorage.getItem('favorite-counter') : null;
+const initialFavoriteCounter = favoriteItemCounterString ? JSON.parse(favoriteItemCounterString) : 0;
+
+const recentlyViewedProductString = typeof window !== 'undefined' ? localStorage.getItem('rvp') : null;
+const initialRecentlyViewedProduct = recentlyViewedProductString ? JSON.parse(recentlyViewedProductString) : [];
+
 
 export function CartProvider({ children }: {children: React.ReactNode}){
-
-    const cartItemString = typeof window !== 'undefined' ? localStorage.getItem('cartItems') : null;
-    const initialCartItems = cartItemString ? JSON.parse(cartItemString) : [];
-
-    const itemCartCounterString = typeof window !== 'undefined' ? localStorage.getItem('cart-counter') : null;
-    const initialCartCounter = itemCartCounterString ? JSON.parse(itemCartCounterString) : 0
-
-    const favoriteItemsString = typeof window !== 'undefined' ? localStorage.getItem('favorite') : null;
-    const initialFavoriteList = favoriteItemsString ? JSON.parse(favoriteItemsString) : [];
-
    
     const [cartItems, setCartItems] = useState(initialCartItems );
     const [cartCounter, setCartCounter] = useState(initialCartCounter);
     const [productData, setProductData] = useState(null);
     const [favoriteItems, setFavoriteItems] = useState(initialFavoriteList);
-    const [favoriteCounter, setFavoriteCounter] = useState(0);
+    const [favoriteCounter, setFavoriteCounter] = useState<number>(initialFavoriteCounter);
+    const [recentViewedProducts, setRecentViewedProducts] = useState<number[]>(initialRecentlyViewedProduct);
 
 
     function addToCart(item: ItemType){
@@ -73,10 +79,11 @@ export function CartProvider({ children }: {children: React.ReactNode}){
     function removeFromFavoriteList(index: number){
         const updatedFavoriteItems = favoriteItems.filter((item: IProduct, favoriteIndex: number) => favoriteIndex !== index);
         setFavoriteItems(updatedFavoriteItems)
-        //return updatedFavoriteItems;
+        
     }
 
     function removeFromCart(item: ItemType){
+        // find item index to remove
         const itemIndex: number = cartItems.findIndex((cartItem: CartItemType) => cartItem?.item?.id === item.id);
 
         if (itemIndex !== -1) {
@@ -95,29 +102,6 @@ export function CartProvider({ children }: {children: React.ReactNode}){
         }
         return false;
     }
-
-    useEffect(() => {
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-        localStorage.setItem('cart-counter', JSON.stringify(cartCounter));
-        localStorage.setItem('favorite', JSON.stringify(favoriteItems));
-        setFavoriteCounter(favoriteItems?.length)
-    }, [cartItems, cartCounter, favoriteItems]);
-
-    useEffect(() => {
-        const isCartItem = localStorage.getItem('cartItems');
-        const isCartCounter = localStorage.getItem('cart-counter');
-        const isFavorite = localStorage.getItem('favorite');
-        
-        if (isCartItem){
-            setCartItems(JSON.parse(isCartItem));
-        }
-        if (isCartCounter){
-            setCartCounter(JSON.parse(isCartCounter));
-        }
-        if (isFavorite){
-            setFavoriteItems(JSON.parse(isFavorite));
-        }
-    }, [])
 
 
     function clearCart(){
@@ -138,6 +122,7 @@ export function CartProvider({ children }: {children: React.ReactNode}){
        setFavoriteItems((prevState: ItemType[]) => {
         const isItemInFavorite = prevState.some(favItem => JSON.stringify(favItem) === JSON.stringify(item));
         if (!isItemInFavorite){
+            setFavoriteCounter(favoriteItems.length + 1)
             return [...prevState, item];
         }
        })
@@ -146,6 +131,7 @@ export function CartProvider({ children }: {children: React.ReactNode}){
         if (favoriteItems){
             const updatedFavoriteItem = favoriteItems.filter((favItem: ItemType) => favItem !== item)
             setFavoriteItems(updatedFavoriteItem);
+            setFavoriteCounter(favoriteItems.length - 1);
         }else {
             return [];
         }
@@ -162,10 +148,39 @@ export function CartProvider({ children }: {children: React.ReactNode}){
         const emptyFavorite: [] = [];
         setFavoriteItems(emptyFavorite);
     }
+
+    useEffect(() => {
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        localStorage.setItem('cart-counter', JSON.stringify(cartCounter));
+        localStorage.setItem('favorite', JSON.stringify(favoriteItems));
+        localStorage.setItem('favorite-counter', JSON.stringify(favoriteCounter));
+        localStorage.setItem('rvp', JSON.stringify(recentViewedProducts));
+    }, [cartItems, cartCounter, favoriteItems, favoriteCounter, recentViewedProducts]);
+
+    useEffect(() => {
+        const isCartItem = localStorage.getItem('cartItems');
+        const isCartCounter = localStorage.getItem('cart-counter');
+        const isFavorite = localStorage.getItem('favorite');
+        const isFavoriteCounter = localStorage.getItem('favorite-counter')
+        const isRecentProduct = localStorage.getItem('rvp');
+        
+        if (isCartItem){
+            setCartItems(JSON.parse(isCartItem));
+        }
+        if (isCartCounter){
+            setCartCounter(JSON.parse(isCartCounter));
+        }
+        if (isFavorite){
+            setFavoriteItems(JSON.parse(isFavorite));
+        }
+        if (isFavoriteCounter){
+            setFavoriteCounter(JSON.parse(isFavoriteCounter));
+        }
+        if (isRecentProduct){
+            setRecentViewedProducts(JSON.parse(isRecentProduct));
+        }
+    }, [])
    
-    
-
-
     return (
         <>
             <CartContext.Provider value={{
@@ -186,6 +201,9 @@ export function CartProvider({ children }: {children: React.ReactNode}){
                 favoriteItems,
                 clearFavorite,
                 removeFromFavoriteList,
+                recentViewedProducts,
+                setRecentViewedProducts,
+                
 
             }}>
 

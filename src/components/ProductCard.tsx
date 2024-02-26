@@ -1,9 +1,12 @@
+'use client'
 import Image from "next/image"
 
 import { Star } from "lucide-react"
 import { getDiscountPrice, getCurrencySign } from "@/lib/utils"
 import TagCount from "./ui/tag"
 import clsx from "clsx";
+import { useContext } from "react"
+import { CartContext } from "@/app/context/cartContext"
 
 interface ProductC  {
     id: number,
@@ -21,9 +24,21 @@ export function ProductCard({ id, title, price, image, rate, discount, className
     const discountPrice = getDiscountPrice(price, discount);
     const discountFormat = getCurrencySign(discountPrice);
 
+    const { setRecentViewedProducts } = useContext(CartContext);
+
+    function handleClick(){
+        // @ts-ignore
+        setRecentViewedProducts((prevState: []) => {
+            const recentItems = prevState.filter((item) => item !== id)
+            return [id, ...recentItems].slice(0, 10); // return first ten items
+            
+        });
+    }
+
+    
     return (
         <>
-            <main className={`${className}`}>
+            <main className={`${className}`} onClick={handleClick}>
                 <div className="rounded-md px-2 py-1 bg-white w-full transition-scale duration-500 ease-in-out
                 shadow-md hover:shadow-xl hover:scale-105">
                     <div className="flex justify-center items-center relative">

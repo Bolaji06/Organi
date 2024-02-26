@@ -26,4 +26,6 @@
     height: 100%;
     object-fit: cover;
   }
-  
+  .scroll::-webkit-scrollbar{
+    width: 4px;
+  }

@@ -31,16 +31,6 @@ export function Cart(){
     )
 }
 
-export function CartTotal(){
-    return (
-        <>
-            <div className="item-amount hidden md:block">
-                        <p className="text-slate-500">item: <span className="text-black text-sm font-extrabold">$129</span></p>
-            </div>
-        </>
-    )
-}
-
 export function LikeProduct(){
     const { favoriteCounter } = useContext(CartContext)
     

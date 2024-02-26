@@ -74,13 +74,7 @@ export default function LikeDropdowmn(){
                         <DropdownMenuItem>
                             {!favoriteItems?.length &&
                             (<div className="w-full flex flex-col justify-center items-center">
-                                {/* <Image 
-                                    src={emptyCart}
-                                    alt="empty cart"
-                                    width={150}
-                                    height={150}
-                                    className="m-auto"
-                                    /> */}
+                                
                                     <HeartCrack size={120} color="#D3D3D3"/>
                                     <p className="text-lg">Favorite is empty</p>
                                     
