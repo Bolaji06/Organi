@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/logo.png.webp"
@@ -13,14 +14,19 @@ import { Button } from "./ui/button";
 import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "./ui/drawer";
 import { LikeProduct, UserAvatar } from "./ui/cart-nav";
 import CartDropdown from "./ui/cart-dropdown";
-
 import LikeDropdowmn from "./ui/like-dropdown";
-
-
+import { Suspense } from "react";
+import { SvgSpinnersEclipse } from "./client";
 
 
 export default function NavBar(){
     const pathname = usePathname();
+
+    const [hasMount, setHasMount] = useState(false);
+
+    useEffect(() => {
+        setHasMount(true);
+    }, [])
 
     return (
         <>
@@ -54,9 +60,12 @@ export default function NavBar(){
                 </div>
                 
                 <div className="flex gap-6 items-center">
-                       <UserAvatar />   
-                    <LikeDropdowmn />
-                    <CartDropdown />
+                       <UserAvatar />
+                       {hasMount ? <div className="flex items-center gap-6">
+                            <LikeDropdowmn />
+                            <CartDropdown />
+                       </div> : <SvgSpinnersEclipse />}
+                       
                     
                     <Drawer>
                         <DrawerTrigger asChild>

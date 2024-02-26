@@ -18,7 +18,8 @@ export interface CartContextType {
     clearFavorite: () => void,
     removeFromFavoriteList: (index: number) => void,
     recentViewedProducts: number[];
-    setRecentViewedProducts: (prevState: number[]) => void
+    setRecentViewedProducts: (prevState: number[]) => void,
+   
 }
 
 export interface ISearchProduct {
