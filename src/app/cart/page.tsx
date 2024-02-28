@@ -53,7 +53,7 @@ export default function CartPage(){
                     </div>
 
 
-                    { cartItems.length ? (<div>
+                    {/* { cartItems.length ? (<div> */}
                     { hasMount ? 
                     <div className="grid lg:grid-cols-[4fr,1fr] gap-6 mt-8">
                         <section className="">
@@ -68,7 +68,7 @@ export default function CartPage(){
                         <CartSkeleton />
                     </div>
                         )}
-                    </div>): (
+                    {/* </div>): (
                         <div className="mt-10 flex justify-center items-center">
                             <div>
                                 <Image 
@@ -78,7 +78,7 @@ export default function CartPage(){
                                 <h1 className="text-center font-semibold text-2xl pb-6">Oopsy! Your cart is currently empty</h1>
                             </div>
                         </div>
-                    )}
+                    )} */}
                     
                 </section>
             </main>
