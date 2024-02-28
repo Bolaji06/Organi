@@ -11,8 +11,8 @@ type ItemType = {
     title: string,
     price: number,
 }
-type CartItemType = {
-    //quantity: number,
+export type CartItemType = {
+    quantity: number,
     item: {
         id: number,
         title: string,
@@ -61,7 +61,7 @@ export function CartProvider({ children }: {children: React.ReactNode}){
         if (isItemInCart){
             setCartItems(cartItems.map((cartItem : CartItemType) => cartItem?.item?.id === item.id ? {
                 cartItem,
-                //quantity: cartItem.quantity + 1
+                quantity: cartItem.quantity + 1
 
             } : cartItem))
             

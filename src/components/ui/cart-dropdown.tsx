@@ -14,6 +14,7 @@ import emptyCart from '../../../public/assets/empty-cart.png'
 import Link from "next/link";
 import { AlertDialogPopOver } from "../AlertDialog";
 import { clear } from "console";
+import { useRouter } from "next/navigation";
 
 export default function CartDropdown(){
 
@@ -23,6 +24,7 @@ export default function CartDropdown(){
         removeItemFromList(index);
         console.log("removed!")
     }
+    const router = useRouter();
 
     return (
         <>
@@ -79,7 +81,7 @@ export default function CartDropdown(){
                             {cartItems.length !== 0 ? 
                                 (<div className="w-full">
                                     <p className="mb-1">Total: <span className="font-bold">{getCurrencySign(getTotalCartItems())}</span></p>
-                                   <Button className="w-full">View All</Button> 
+                                   <Button onClick={() => router.push('/cart')} className="w-full">View All</Button> 
                                    
                                 </div>)
                                  :
