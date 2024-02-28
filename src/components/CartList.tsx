@@ -36,6 +36,7 @@ export default function CartList({ data } : Item){
                         </header>
                     </div>
                     {
+                        // @ts-ignore
                         data.map((item: CartItemType) => {
 
                         return(
