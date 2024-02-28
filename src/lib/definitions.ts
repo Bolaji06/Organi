@@ -1,16 +1,16 @@
 
 export interface CartContextType {
-    cartItems: any[]; // adjust type as per your cart item structure
+    cartItems: any[]; 
     cartCounter: number;
-    addToCart: (item: any) => void; // adjust type as per addToCart function signature
-    removeFromCart: (item: IProduct) => void; // adjust type as per removeFromCart function signature
+    addToCart: (item: any) => void; 
+    removeFromCart: (item: IProduct) => void; 
     clearCart: () => void;
     getTotalCartItems: () => number;
     checkIsItemInCart: (item: IProduct) => boolean;
-    productData: any; // adjust type as per your product data structure
-    setProductData: (data: any) => void; // adjust type as per setProductData function signature
-    removeItemFromList: (index: number) => void; // adjust type as per removeItemFromList function signature
-    addToFavorite: (item: IProduct) => void; // adjust type as per addToFavorite function signature
+    productData: any; 
+    setProductData: (data: any) => void;
+    removeItemFromList: (index: number) => void; 
+    addToFavorite: (item: IProduct) => void; 
     checkIsItemInFavorite: (item: IProduct) => boolean;
     removeFromFavorite: (item: IProduct) => void;
     favoriteCounter: number,
@@ -53,6 +53,12 @@ export interface IProduct {
     category: string,
     thumbnail: string,
     images: Array<string>
+}
+export interface IProductWithQuantity {
+    item: {
+        quantity: number,
+        item: IProduct,
+    }
 }
 
 
