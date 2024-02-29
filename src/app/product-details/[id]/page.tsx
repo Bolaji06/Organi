@@ -6,6 +6,7 @@ import Loading from "./loading";
 import Breadcrumbs from "@/components/breadcrumbs";
 import Product from "@/components/Product";
 import RecentlyViewedProduct from "@/components/RecentlyViewed";
+import { notFound } from "next/navigation";
 
 export default async function ProductDetailsPage({
   params,
