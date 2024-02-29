@@ -1,65 +1,59 @@
-
 export interface CartContextType {
-    cartItems: any[]; 
-    cartCounter: number;
-    addToCart: (item: any) => void; 
-    removeFromCart: (item: IProduct) => void; 
-    clearCart: () => void;
-    getTotalCartItems: () => number;
-    checkIsItemInCart: (item: IProduct) => boolean;
-    productData: any; 
-    setProductData: (data: any) => void;
-    removeItemFromList: (index: number) => void; 
-    addToFavorite: (item: IProduct) => void; 
-    checkIsItemInFavorite: (item: IProduct) => boolean;
-    removeFromFavorite: (item: IProduct) => void;
-    favoriteCounter: number,
-    favoriteItems: [],
-    clearFavorite: () => void,
-    removeFromFavoriteList: (index: number) => void,
-    recentViewedProducts: number[];
-    setRecentViewedProducts: (prevState: number[]) => void,
-   
+  cartItems: any[];
+  cartCounter: number;
+  addToCart: (item: any) => void;
+  removeFromCart: (item: IProduct) => void;
+  clearCart: () => void;
+  getTotalCartItems: () => number;
+  checkIsItemInCart: (item: IProduct) => boolean;
+  productData: any;
+  setProductData: (data: any) => void;
+  removeItemFromList: (index: number) => void;
+  addToFavorite: (item: IProduct) => void;
+  checkIsItemInFavorite: (item: IProduct) => boolean;
+  removeFromFavorite: (item: IProduct) => void;
+  favoriteCounter: number;
+  favoriteItems: [];
+  clearFavorite: () => void;
+  removeFromFavoriteList: (index: number) => void;
+  recentViewedProducts: number[];
+  setRecentViewedProducts: (prevState: number[]) => void;
 }
 
 export interface ISearchProduct {
-    products: [
-        {
-            id: number,
-            title: string,
-            description: string,
-            price: number,
-            discountPercentage: number,
-            rating: number,
-            stock: number,
-            brand: string,
-            category: string,
-            thumbnail: string,
-            images: Array<string>
-
-        }
-    ]
+  products: [
+    {
+      id: number;
+      title: string;
+      description: string;
+      price: number;
+      discountPercentage: number;
+      rating: number;
+      stock: number;
+      brand: string;
+      category: string;
+      thumbnail: string;
+      images: Array<string>;
+    }
+  ];
 }
 
 export interface IProduct {
-    id: number,
-    title: string,
-    description: string,
-    price: number,
-    discountPercentage: number,
-    rating: number,
-    stock: number,
-    brand: string,
-    category: string,
-    thumbnail: string,
-    images: Array<string>
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  thumbnail: string;
+  images: Array<string>;
 }
 export interface IProductWithQuantity {
-    item: {
-        quantity: number,
-        item: IProduct,
-    }
+  item: {
+    quantity: number;
+    item: IProduct;
+  };
 }
-
-
-
