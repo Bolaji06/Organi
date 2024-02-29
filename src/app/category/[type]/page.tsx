@@ -13,6 +13,7 @@ import {
   menAdsCarousel,
 } from "@/lib/carousel-data";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export default async function CategoryPage({
   params,
@@ -22,7 +23,9 @@ export default async function CategoryPage({
   const productCategoryData = await getCategoryProduct(params.type);
   const products = productCategoryData?.products;
 
-  //const URIpath = decodeURI(params.type)
+  if (!products.length){
+    notFound();
+  }
 
   return (
     <>

@@ -30,6 +30,7 @@ import { Suspense, useContext, useEffect, useState } from "react";
 import { CartContext } from "@/app/context/cartContext";
 import { IProduct } from "@/lib/definitions";
 
+
 export default function Product({ data }: { data: IProduct }) {
   const {
     title,

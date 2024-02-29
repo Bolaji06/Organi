@@ -43,7 +43,7 @@ export default function CartList({ data }: Item) {
               <div
                 key={item.item.id}
                 className="grid grid-cols-1 sm:grid-cols-[4fr,2fr,2fr]
-                     border-b border-slate-300 pb-4"
+                     border-b border-slate-300 pb-4 transition-all ease-in-out duration-500"
               >
                 <section className="flex gap-3 pt-2">
                   <div>
@@ -57,7 +57,7 @@ export default function CartList({ data }: Item) {
                   </div>
                   <div>
                     <div>
-                      <h3 className="text-gray-800 font-bold">
+                      <h3 className="text-gray-800 font-bold first-letter:capitalize">
                         {item.item.title}
                       </h3>
                       <p className="text-sm">
