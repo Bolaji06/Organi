@@ -4,6 +4,7 @@ import { Popsicle } from "lucide-react";
 import {
   deliveryService,
   getCurrencySign,
+  getDeliveryDate,
   getDiscountPrice,
   location,
 } from "@/lib/utils";
@@ -30,8 +31,33 @@ import { Suspense, useContext, useEffect, useState } from "react";
 import { CartContext } from "@/app/context/cartContext";
 import { IProduct } from "@/lib/definitions";
 
-
-export default function Product({ data }: { data: IProduct }) {
+/**
+ * 
+ * @param {Object} data - 
+ The product data
+ * @param {string} 
+ data.title - The title of the product
+ * @param {number} 
+ data.price - The price of the product
+ *@param {string}
+ data.description - The description of the product
+ *@param {string}
+ data.category - The category of the product
+ *@param {Array<string>}
+  data.images - The product images
+ *@param {number}
+ data.rating - The product rating
+ * @param {stock}
+ data.stock - Total amount in stock
+ * @param {number}
+ data.discountPercentage - Product discount percentage
+ * @returns {React.ReactElement} The rendered product component
+ */
+export default function Product({
+  data,
+}: {
+  data: IProduct;
+}): React.ReactElement | null {
   const {
     title,
     price,
@@ -48,6 +74,9 @@ export default function Product({ data }: { data: IProduct }) {
   const { checkIsItemInCart, setProductData } = useContext(CartContext);
 
   const [hasMount, setHasMount] = useState(false);
+  const { from, to } = getDeliveryDate();
+
+  //console.log(deliveryDate);
 
   useEffect(() => {
     setHasMount(true);
@@ -113,7 +142,7 @@ export default function Product({ data }: { data: IProduct }) {
                   </div>
 
                   <div className="flex justify-between items-center mt-4">
-                    <AddToFavoriteButton />
+                    <AddToFavoriteButton data={data} />
                     {hasMount ? (
                       <div>
                         {checkIsItemInCart(data) ? (
@@ -182,9 +211,18 @@ export default function Product({ data }: { data: IProduct }) {
                     <div>
                       <h2 className="font-semibold pb-1">Pickup Station</h2>
                       <p className="text-sm">
-                        Delivery Fees: <span>{getCurrencySign(500)}</span>
+                        Delivery Fees:{" "}
+                        <span className="font-bold">
+                          {getCurrencySign(500)}
+                        </span>
                       </p>
-                      <p>The delivery content goes here...</p>
+                      <p className="text-sm">
+                        Arriving at pickup station between
+                        <span className="font-bold"> {from}</span> &{" "}
+                        <span className="font-bold"> {to}</span> when you order
+                        within next{" "}
+                        <span className="font-bold">18hrs 56mins</span>
+                      </p>
                     </div>
                   </div>
                   <div className="flex mt-8 justify-start items-start gap-6">
@@ -194,9 +232,15 @@ export default function Product({ data }: { data: IProduct }) {
                     <div>
                       <h2 className="font-semibold pb-1">Home Delivery</h2>
                       <p className="text-sm">
-                        Delivery Fees: <span>{getCurrencySign(500)}</span>
+                        Delivery Fees: <span className="font-bold">{getCurrencySign(500)}</span>
                       </p>
-                      <p>The delivery content goes here...</p>
+                      <p className="text-sm">
+                        Ready for delivery between
+                        <span className="font-bold"> {from}</span> &{" "}
+                        <span className="font-bold"> {to}</span> when you order
+                        within next{" "}
+                        <span className="font-bold">18hrs 56mins</span>
+                      </p>
                     </div>
                   </div>
                 </div>

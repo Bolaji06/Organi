@@ -5,12 +5,6 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'fakestoreapi.com',
-                port: '',
-                pathname: '/img/**', 
-            },
-            {
-                protocol: 'https',
                 hostname: 'avatars.githubusercontent.com',
                 port: '',
                 pathname: '/u/**', 

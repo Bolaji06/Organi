@@ -80,3 +80,29 @@ export function getDiscountPrice(amount: number, discountPercent: number) {
 export function ignoreCase(word: string) {
   return new RegExp(word, "i").ignoreCase;
 }
+
+export function getDeliveryDate() {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const deliveryDate = new Date();
+  const month = months[deliveryDate.getMonth()];
+  const date = deliveryDate.getDate();
+  const from = `${month} ${date + 2}`;
+  const to = `${month} ${date + 3}`;
+  return {
+    from,
+    to,
+  };
+}

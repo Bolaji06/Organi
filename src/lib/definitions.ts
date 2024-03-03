@@ -1,3 +1,5 @@
+import { CartItemType } from "@/app/context/cartContext";
+
 export interface CartContextType {
   cartItems: any[];
   cartCounter: number;
@@ -18,6 +20,12 @@ export interface CartContextType {
   removeFromFavoriteList: (index: number) => void;
   recentViewedProducts: number[];
   setRecentViewedProducts: (prevState: number[]) => void;
+  quantity: number,
+  increaseQuantity: (item: IProduct) => void,
+  decreaseQuantity: (item: IProduct) => void
+  getTotalQuantity: () => number,
+  getTotalPriceWithQuantity: () => number,
+  addToFavoriteCartList: (item: IProduct) => void
 }
 
 export interface ISearchProduct {
@@ -56,4 +64,17 @@ export interface IProductWithQuantity {
     quantity: number;
     item: IProduct;
   };
+}
+export type Product = {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  thumbnail: string;
+  images: Array<string>;
 }
