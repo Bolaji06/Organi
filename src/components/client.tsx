@@ -92,7 +92,7 @@ export function RemoveFromCart({ data }: CartBtnProps) {
   );
 }
 
-export function AddToFavoriteButton() {
+export function AddToFavoriteButton({ data }: { data: Product }) {
   const [toggle, setToggle] = useState(false);
   const {
     addToFavorite,
@@ -101,9 +101,11 @@ export function AddToFavoriteButton() {
     removeFromFavorite,
   } = useContext(CartContext);
 
+
   const handleToggle = () => {
     if (!toggle) {
-      addToFavorite(productData);
+      addToFavorite(data);
+      //onClick(data)
     } else {
       removeFromFavorite(productData);
     }
@@ -179,7 +181,7 @@ import type { SVGProps } from "react";
 import { ToastAction } from "./ui/toast";
 import { CartContext } from "@/app/context/cartContext";
 import clsx from "clsx";
-import { IProduct } from "@/lib/definitions";
+import { IProduct, Product } from "@/lib/definitions";
 
 export function SvgSpinnersEclipse(props: SVGProps<SVGSVGElement>) {
   return (

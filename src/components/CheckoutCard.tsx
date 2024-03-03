@@ -10,9 +10,21 @@ import { useContext } from "react";
 import { CartContext } from "@/app/context/cartContext";
 import { getCurrencySign } from "@/lib/utils";
 
-export default function CheckoutCard() {
+/**
+ * Renders a checkout card component that displays the order summary
+    delivery cahrges, subtotal, total price, and payment options
+ *
+ * @returns {React.ReactElement} The rendered checkout card component
+ */
+export default function CheckoutCard(): React.ReactElement | null {
   const cards = [visa, master, verve];
-  const { cartItems, getTotalCartItems } = useContext(CartContext);
+  const { cartItems, getTotalQuantity, getTotalPriceWithQuantity } =
+    useContext(CartContext);
+
+  const totalPriceWithQuantity = getCurrencySign(
+    getTotalPriceWithQuantity() * 100
+  );
+  const totalQuantity = getTotalQuantity();
 
   return (
     <>
@@ -23,7 +35,7 @@ export default function CheckoutCard() {
         <div className="border-b border-slate-300 py-1 flex justify-between items-center font-bold text-lg">
           <h2 className="px-2">Order Summary</h2>
           <h2 className="px-2">
-            {cartItems.length} {cartItems.length > 1 ? "Items" : "Item"}
+            {totalQuantity} {cartItems.length > 1 ? "Items" : "Item"}
           </h2>
         </div>
         <div className="flex justify-between py-2 border-b border-slate-300">
@@ -35,16 +47,12 @@ export default function CheckoutCard() {
 
         <div className="flex justify-between py-2 border-b border-slate-300">
           <p className="text-sm px-2 ">Subtotal</p>
-          <p className="text-sm px-2 font-bold">
-            {getCurrencySign(getTotalCartItems())}
-          </p>
+          <p className="text-sm px-2 font-bold">{totalPriceWithQuantity}</p>
         </div>
 
         <div className="flex justify-between py-2 border-b border-slate-300 text-base">
           <p className="px-2 font-bold">Total</p>
-          <p className="px-2 font-bold">
-            {getCurrencySign(getTotalCartItems())}
-          </p>
+          <p className="px-2 font-bold">{totalPriceWithQuantity}</p>
         </div>
         <div className="py-2 border-b border-slate-300">
           <p className="text-xs text-red-800 text-right px-2">

@@ -13,7 +13,16 @@ import CartSkeleton from "@/components/ui/cart-skeleton";
 import emptyCart from "../../../public/assets/empty-cart.png";
 import Image from "next/image";
 
-export default function CartPage() {
+/**
+ * This is a cart page that returns a
+ * top navigation breadcrumb a loading UI skeleton if the page has
+ * not mounted.When the component has mounted it display the CartList
+ * component and the Checkout card component.
+ * It also display a fallback image component if the cartList is empty
+ * 
+ * @returns {React.ReactElement} The cart page component
+ */
+export default function CartPage(): React.ReactElement | null {
   const { cartItems } = useContext(CartContext);
   const [hasMount, setHasMount] = useState(false);
 

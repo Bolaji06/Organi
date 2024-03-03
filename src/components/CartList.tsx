@@ -5,20 +5,33 @@ import { Button } from "./ui/button";
 import Image from "next/image";
 
 import image from "../../public/assets/fragrance.webp";
-import { RemoveFromCart } from "./client";
+import { AddToFavoriteButton, RemoveFromCart } from "./client";
 import { IProduct } from "@/lib/definitions";
 import { getCurrencySign } from "@/lib/utils";
 import { CartContext, CartItemType } from "@/app/context/cartContext";
-import { useContext } from "react";
+import React, { useContext } from "react";
+import clsx from "clsx";
 
 export interface Item {
   data: IProduct;
   quantity: number;
 }
-export default function CartList({ data }: Item) {
-  const router = useRouter();
-  const { addToCart, removeFromCart } = useContext(CartContext);
 
+/**
+ Renders cart list component that displays
+ the product image, product title, product price,
+ brand name, buttons to increase and decrease quantity number
+ product quantity, a add to cart button and a like icon
+ * 
+ * @param data cart items list
+ * @returns {React.ReactElement} The rendered cart list
+ *
+ */
+export default function CartList({ data }: Item) : React.ReactElement{
+  const router = useRouter();
+  const { addToCart, removeFromCart, increaseQuantity, decreaseQuantity, quantity } = useContext(CartContext);
+
+  //console.log(data);
   return (
     <>
       <main>
@@ -65,9 +78,10 @@ export default function CartList({ data }: Item) {
                       </p>
                     </div>
                     <div className="flex text-center border mt-5">
-                      <Button
-                        className="bg-white text-center w-8 h-8 text-lg font-bold
-                                     rounded-none text-black "
+                     <Button
+                        onClick={ ()=> decreaseQuantity(item.item)}
+                        className={`${clsx({'invisible': item.quantity === 1})} bg-white text-center w-8 h-8 text-lg font-bold
+                                     rounded-none text-black active:bg-slate-100`}
                       >
                         -
                       </Button>
@@ -78,8 +92,9 @@ export default function CartList({ data }: Item) {
                         <p>{item.quantity}</p>
                       </div>
                       <Button
+                        onClick={() => increaseQuantity(item.item)}
                         className="bg-white p-0 w-8 h-8 text-lg font-bold
-                                     rounded-none text-black"
+                                     rounded-none text-black active:bg-slate-100"
                       >
                         +
                       </Button>
@@ -89,17 +104,17 @@ export default function CartList({ data }: Item) {
 
                 <section className="pt-1">
                   <h2 className="text-lg text-gray-800 font-bold">
-                    {getCurrencySign(item.item.price * 100)}
+                    {getCurrencySign((item.item.price * 100) * item.quantity)}
                   </h2>
-                  <p className="text-amber-800 text-sm">$25000 x 3 items</p>
+                  <p className="text-amber-800 text-sm">{`${getCurrencySign(item.item.price * 100)} x ${item.quantity}`}</p>
                 </section>
 
                 <section className="">
-                  <section className="flex justify-between gap-2 items-center pt-2">
+                  <section className="flex justify-end items-center pt-2">
                     <Button onClick={() => removeFromCart(item.item)}>
                       Remove from Cart
                     </Button>
-                    <Button>Like</Button>
+                    {/* <AddToFavoriteButton data={item.item}/> */}
                   </section>
                 </section>
               </div>
