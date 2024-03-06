@@ -6,8 +6,8 @@ import Link from "next/link";
 import logo from "../../public/logo.png.webp";
 
 import { links } from "@/lib/links";
-import { MenuSquare, MessagesSquareIcon } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { CircleUserRound, MenuSquare, MessagesSquareIcon } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 
 import { clsx } from "clsx";
 import { Button } from "./ui/button";
@@ -24,9 +24,18 @@ import CartDropdown from "./ui/cart-dropdown";
 import LikeDropdowmn from "./ui/like-dropdown";
 import { Suspense } from "react";
 import { SvgSpinnersEclipse } from "./client";
+import {
+  SignInButton,
+  SignOutButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  useAuth,
+} from "@clerk/nextjs";
 
-export default function NavBar() {
+export default function NavBar(): React.ReactElement | null {
   const pathname = usePathname();
+  const router = useRouter();
 
   const [hasMount, setHasMount] = useState(false);
 
@@ -36,7 +45,7 @@ export default function NavBar() {
 
   return (
     <>
-      <nav className="flex justify-between items-center  py-4">
+      <nav className="flex justify-between items-center px-6 lg:px-12 py-4">
         <div>
           <Link href={"/"}>
             <Image src={logo} alt="Organi logo" width={100} height={100} />
@@ -63,7 +72,19 @@ export default function NavBar() {
         </div>
 
         <div className="flex gap-6 items-center">
-          <UserAvatar />
+          <div>
+            <SignedIn>
+              <UserButton afterSignOutUrl="/"/>
+            </SignedIn>
+
+            <SignedOut>
+              <CircleUserRound
+                className="cursor-pointer"
+                size={24}
+                onClick={() => router.push("/sign-in")}
+              />
+            </SignedOut>
+          </div>
           {hasMount ? (
             <div className="flex items-center gap-6">
               <LikeDropdowmn />

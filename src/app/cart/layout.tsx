@@ -1,3 +1,6 @@
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
+
 export default function CartLayout({
   children,
 }: {
@@ -5,7 +8,11 @@ export default function CartLayout({
 }) {
   return (
     <>
-      <main>{children}</main>
+      <main>
+        <NavBar />
+        {children}
+        <Footer />
+      </main>
     </>
   );
 }

@@ -1,13 +1,16 @@
 import AllProduct from "@/components/AllProducts";
 import { HeroCarousel } from "@/components/Carousel";
 import Category from "@/components/Category";
+import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import TopLevel from "@/components/TopLevel";
+import { auth, currentUser } from "@clerk/nextjs";
 import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
+      <NavBar />
       <main className="px-4 lg:px-14">
         <section>
           <TopLevel isContact={true} />
@@ -18,6 +21,7 @@ export default function Home() {
           <AllProduct />
         </section>
       </main>
+      <Footer />
     </>
   );
 }

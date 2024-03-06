@@ -232,7 +232,7 @@ export default function Product({
                     <div>
                       <h2 className="font-semibold pb-1">Home Delivery</h2>
                       <p className="text-sm">
-                        Delivery Fees: <span className="font-bold">{getCurrencySign(500)}</span>
+                        Delivery Fees: <span className="font-bold">{getCurrencySign(850)}</span>
                       </p>
                       <p className="text-sm">
                         Ready for delivery between

@@ -1,7 +1,17 @@
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 export default function SearchLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <main>
+        <NavBar />
+        {children}
+        <Footer />
+      </main>
+    </>
+  );
 }

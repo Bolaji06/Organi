@@ -1,3 +1,6 @@
+import Footer from "@/components/Footer";
+import NavBar from "@/components/NavBar";
+
 export default function AllCategoryLayout({
   children,
 }: {
@@ -5,7 +8,11 @@ export default function AllCategoryLayout({
 }) {
   return (
     <>
-      <main>{children}</main>
+      <main>
+        <NavBar />
+        {children}
+        <Footer />
+      </main>
     </>
   );
 }
