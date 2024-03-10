@@ -37,14 +37,20 @@ export function getCurrencySign(price: number) {
   return numberformat.format(price);
 }
 
+/**
+ * strip off every last s from 'mens' and 'womens' category name
+ * 
+ * @param category Product category name
+ * @returns {withoutLasts} category name without the last from mens and women
+ */
 export function removeLastSfromCategory(category: string): string {
   const withoutLastS = category.replace(/womens|mens/g, (match) =>
     match === "womens" ? "women" : "men"
   );
   return withoutLastS;
 }
-export const deliveryService: string[] = ["DHL", "GIGS", "UPS", "FedEx"];
-export const location: string[] = [
+export const deliveryService: Array<string> = ["DHL", "GIGS", "UPS", "FedEx"];
+export const location: Array<string> = [
   "Lagos",
   "Abuja",
   "Port Harcourt",
@@ -81,6 +87,11 @@ export function ignoreCase(word: string) {
   return new RegExp(word, "i").ignoreCase;
 }
 
+/**
+ * Returns the ordered date (from) and delivery date (to).
+ * 
+ * @returns {{ from: string, to: string }} the ordered date and delivery date to
+ */
 export function getDeliveryDate() {
   const months = [
     "Jan",
@@ -105,4 +116,12 @@ export function getDeliveryDate() {
     from,
     to,
   };
+}
+
+export function copyAmountToClipboard(amount: string){
+  try {
+    navigator.clipboard.writeText(amount);
+  }catch(err){
+    console.log('unable to copy');
+  }
 }

@@ -9,6 +9,7 @@ import { LockKeyhole } from "lucide-react";
 import { useContext } from "react";
 import { CartContext } from "@/app/context/cartContext";
 import { getCurrencySign } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 /**
  * Renders a checkout card component that displays the order summary
@@ -17,6 +18,7 @@ import { getCurrencySign } from "@/lib/utils";
  * @returns {React.ReactElement} The rendered checkout card component
  */
 export default function CheckoutCard(): React.ReactElement | null {
+  const router = useRouter()
   const cards = [visa, master, verve];
   const { cartItems, getTotalQuantity, getTotalPriceWithQuantity } =
     useContext(CartContext);
@@ -58,10 +60,11 @@ export default function CheckoutCard(): React.ReactElement | null {
           <p className="text-xs text-red-800 text-right px-2">
             Excluding delivery charges
           </p>
-          <div className="px-2 py-3">
-            <Button className="w-full h-10 rounded-sm font-semibold">
+          <div className="px-2 py-1">
+            <Button onClick={() => router.push("/checkout")} className="w-full h-10 rounded-sm font-semibold">
               Continue to checkout
             </Button>
+            <p className="text-xs py-2 text-gray-400 text-center">Kindly login to checkout</p>
           </div>
         </div>
 
