@@ -566,7 +566,7 @@ export default function CheckoutForm({ user }: { user: string }) {
                 -translate-x-1/2 left-1/2"
                   >
                     <p className="text-slate-200 text-sm text-center">
-                      You are to pay exactly
+                      You are to pay
                     </p>
                     {hasMount ? (
                       <div className="flex gap-2">
