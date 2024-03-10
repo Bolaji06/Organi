@@ -117,3 +117,11 @@ export function getDeliveryDate() {
     to,
   };
 }
+
+export function copyAmountToClipboard(amount: string){
+  try {
+    navigator.clipboard.writeText(amount);
+  }catch(err){
+    console.log('unable to copy');
+  }
+}

@@ -75,15 +75,21 @@ const config = {
           '0%': { transform: "scale(1)"},
           '90%': { transform: "scale(1.2)"},
           '100%': { transform: "scale(1.1)"},
-
+        },
+        "gradient": {
+          '0%': {backgroundPosition: '0% 50%'},
+          '50%': {backgroundPosition: '100% 50%'},
+          '100%': {backgroundPosition: '0% 50%'},
         },
       },
+
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "like-anim": "like-anim 0.5s 1",
+        "payment-card": "gradient 5s ease infinite"
       },
-    },
+  },
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config

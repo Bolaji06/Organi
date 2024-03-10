@@ -78,3 +78,11 @@ export type Product = {
   thumbnail: string;
   images: Array<string>;
 }
+
+export interface IForm {
+  fullName: string,
+  phoneNumber: string,
+  address: string,
+  lga: string,
+  state: string,
+}
