@@ -26,7 +26,7 @@ import {
 import { copyAmountToClipboard, getCurrencySign } from "@/lib/utils";
 import { CartContext } from "@/app/context/cartContext";
 import { Skeleton } from "./ui/skeleton";
-import { Span } from "next/dist/trace";
+
 
 const deliveryFormSchema = z.object({
   fullName: z
