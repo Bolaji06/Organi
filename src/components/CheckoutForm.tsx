@@ -134,7 +134,7 @@ export default function CheckoutForm({ user }: { user: string }) {
     expiryYear: "",
     cvv: "",
   });
-  const [error, setError] = useState<FormErrorsType>({});
+  const [cardPaymentFormError, setCardPaymentFormError] = useState<FormErrorsType>({});
 
   function handleFormChange(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -181,7 +181,7 @@ export default function CheckoutForm({ user }: { user: string }) {
     try {
       cardSchema.parse(cardForm);
       console.log("Card Input is valid ", cardForm);
-      setError({});
+      setCardPaymentFormError({});
     } catch (error) {
       if (error instanceof ZodError) {
         console.log("Validation failed:", error.errors);
@@ -191,13 +191,10 @@ export default function CheckoutForm({ user }: { user: string }) {
             formattedErrors[err.path[0] as keyof CardFormType] = err.message;
           }
         });
-        setError(formattedErrors);
+        setCardPaymentFormError(formattedErrors);
       }
     }
   }
-
-  const ref = useRef<HTMLInputElement>(null);
-  const selectRef = useRef<HTMLDivElement>(null);
 
   const [selectOption, setSelectOption] = useState("");
 
@@ -261,7 +258,7 @@ export default function CheckoutForm({ user }: { user: string }) {
                 checked={homeDelivery}
                 value={"home"}
                 onChange={handleHomeDelivery}
-                ref={ref}
+                
               />
               <label className="text-base text-center font-bold" htmlFor="home">
                 Home Delivery
@@ -566,7 +563,7 @@ export default function CheckoutForm({ user }: { user: string }) {
                 -translate-x-1/2 left-1/2"
                   >
                     <p className="text-slate-200 text-sm text-center">
-                      You are to pay exactly
+                      You are to pay
                     </p>
                     {hasMount ? (
                       <div className="flex gap-2">
@@ -622,9 +619,9 @@ export default function CheckoutForm({ user }: { user: string }) {
                           value={cardForm.cardHolderName}
                           onChange={handleCardPaymentForm}
                         />
-                        {error.cardHolderName && (
+                        {cardPaymentFormError.cardHolderName && (
                           <span className="text-red-500 text-sm">
-                            {error.cardHolderName}
+                            {cardPaymentFormError.cardHolderName}
                           </span>
                         )}
                       </div>
@@ -642,9 +639,9 @@ export default function CheckoutForm({ user }: { user: string }) {
                           className="appearance-none m-0"
                         />
                         <span>
-                          {error.cardNumber && (
+                          {cardPaymentFormError.cardNumber && (
                             <span className="text-red-500 text-sm">
-                              {error.cardNumber}
+                              {cardPaymentFormError.cardNumber}
                             </span>
                           )}
                         </span>
@@ -661,9 +658,9 @@ export default function CheckoutForm({ user }: { user: string }) {
                               value={cardForm.expiryMonth}
                               onChange={handleCardPaymentForm}
                             />
-                            {error.expiryMonth && (
+                            {cardPaymentFormError.expiryMonth && (
                               <span className="text-red-500 text-sm">
-                                {error.expiryMonth}
+                                {cardPaymentFormError.expiryMonth}
                               </span>
                             )}
                           </div>
@@ -679,9 +676,9 @@ export default function CheckoutForm({ user }: { user: string }) {
                               value={cardForm.expiryYear}
                               onChange={handleCardPaymentForm}
                             />
-                            {error.expiryYear && (
+                            {cardPaymentFormError.expiryYear && (
                               <span className="text-red-500 text-sm">
-                                {error.expiryYear}
+                                {cardPaymentFormError.expiryYear}
                               </span>
                             )}
                           </div>
@@ -697,9 +694,9 @@ export default function CheckoutForm({ user }: { user: string }) {
                               value={cardForm.cvv}
                               onChange={handleCardPaymentForm}
                             />
-                            {error.cvv && (
+                            {cardPaymentFormError.cvv && (
                               <span className="text-red-500 text-sm">
-                                {error.cvv}
+                                {cardPaymentFormError.cvv}
                               </span>
                             )}
                           </div>
