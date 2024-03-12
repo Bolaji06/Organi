@@ -27,7 +27,6 @@ import { copyAmountToClipboard, getCurrencySign } from "@/lib/utils";
 import { CartContext } from "@/app/context/cartContext";
 import { Skeleton } from "./ui/skeleton";
 
-
 const deliveryFormSchema = z.object({
   fullName: z
     .string()
@@ -76,7 +75,7 @@ const cardSchema = z.object({
     }),
   cvv: z
     .string()
-    .length(4)
+    .length(3)
     .refine((val) => /^\d.+$/.test(val), {
       message: "Card CVV must contain only number",
     }),
@@ -101,8 +100,9 @@ export default function CheckoutForm({ user }: { user: string }) {
   const [openAddress, setOpenAddress] = useState(false);
   const [hasMount, setHasMount] = useState(false);
 
-  const { getTotalPriceWithQuantity } = useContext(CartContext);
-  const amountToPay = getTotalPriceWithQuantity() * 100;
+  const { getTotalPriceWithQuantity, getTotalQuantity } = useContext(CartContext);
+  const deliveryFees = getTotalQuantity() * 200;
+  const amountToPay = getTotalPriceWithQuantity() * 100 + deliveryFees;
 
   function handlePaymentOnDelivery() {
     setPaymentOnDelivery(true);
@@ -134,7 +134,8 @@ export default function CheckoutForm({ user }: { user: string }) {
     expiryYear: "",
     cvv: "",
   });
-  const [cardPaymentFormError, setCardPaymentFormError] = useState<FormErrorsType>({});
+  const [cardPaymentFormError, setCardPaymentFormError] =
+    useState<FormErrorsType>({});
 
   function handleFormChange(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -154,6 +155,13 @@ export default function CheckoutForm({ user }: { user: string }) {
         [name]: value,
       };
     });
+  }
+  function handleCancelPaymentForm(){
+    setCardFrom((prevState) => {
+      return {
+        ...prevState
+      }
+    })
   }
 
   function onDeliveryFormSubmition(e: FormEvent) {
@@ -236,7 +244,7 @@ export default function CheckoutForm({ user }: { user: string }) {
   };
   return (
     <>
-      <main className="border border-red-800 rounded-md">
+      <main className="border border-gray-300 rounded-md">
         <section className="">
           <header className="flex gap-2 items-center py-2 px-3 border-b border-gray-300">
             <CheckCircle color="gray" size={19} />
@@ -258,7 +266,6 @@ export default function CheckoutForm({ user }: { user: string }) {
                 checked={homeDelivery}
                 value={"home"}
                 onChange={handleHomeDelivery}
-                
               />
               <label className="text-base text-center font-bold" htmlFor="home">
                 Home Delivery
@@ -688,7 +695,7 @@ export default function CheckoutForm({ user }: { user: string }) {
                           <div>
                             <Input
                               type="number"
-                              placeholder="4 digits CVV"
+                              placeholder="3 digits CVV"
                               className="mt-2"
                               name="cvv"
                               value={cardForm.cvv}
@@ -703,9 +710,15 @@ export default function CheckoutForm({ user }: { user: string }) {
                         </label>
                       </div>
                     </div>
-                    <Button type="submit" className="mt-6">
+                    <div className="flex items-center mt-8 gap-6">
+                      <Button type="submit" className="">
                       Submit
                     </Button>
+                    <Button onClick={handleCancelPaymentForm}>
+                        Cancel
+                    </Button>
+                    </div>
+                    
                   </form>
                 </div>
               </div>
