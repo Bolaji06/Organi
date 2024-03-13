@@ -4,6 +4,7 @@ import logo from "../../../public/logo.png.webp";
 import CheckoutForm from "@/components/CheckoutForm";
 import CheckOutSummary from "@/components/CheckoutSummary";
 import { currentUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 export default async function CheckoutPage() {
   const user = await currentUser();
@@ -15,13 +16,16 @@ export default async function CheckoutPage() {
       <main className="bg-slate-100 pb-6">
         <header className="shadow-md px-4 lg:px-12 py-4 bg-white">
           <div className="flex justify-evenly">
-            <Image
-              src={logo}
-              alt="Organi logo"
-              width={200}
-              height={200}
-              className="w-20"
-            />
+            <Link
+            href={'/'}>
+              <Image
+                src={logo}
+                alt="Organi logo"
+                width={200}
+                height={200}
+                className="w-20"
+              />
+            </Link>
             <h1 className="text-2xl font-bold">Checkout</h1>
           </div>
         </header>

@@ -1,3 +1,5 @@
+import Footer from "@/components/Footer";
+
 export default function CheckoutLayout({
   children,
 }: {
@@ -7,6 +9,9 @@ export default function CheckoutLayout({
     <>
       <main>
         {children}
+        <div>
+          <Footer />
+        </div>
       </main>
     </>
   );

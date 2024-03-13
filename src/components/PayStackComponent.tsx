@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { FormEvent } from "react";
 
 
-export default function PayStackHookExample({
+export default function PayStackComponent({
   amount,
   email,
   isFormFilled,
@@ -17,20 +17,20 @@ export default function PayStackHookExample({
     reference: new Date().getTime().toString(),
     email: email,
     amount: amount,
-    publicKey: "pk_test_bb90e1b2782df47662013e5ea0d8cc45712737d9",
+    publicKey: `${process.env.NEXT_PUBLIC_PAYSTACK_API_TEST_KEY}`,
+    onSuccess: (reference: string) => {
+      console.log("Success!", reference)
+    },
+    onClose: () => {
+      console.log('Popup close')
+    } 
+
   };
-  function onSuccess(reference: string) {
-    console.log("Go back Home", reference);
-  }
-  //console.log(process.env.PAYSTACK_API_TEST_KEY);
-  function onClose() {
-    console.log("PayStack Dialog close");
-  }
+
   const initializePayment = usePaystackPayment(config);
   function handleInitializePayment(e: FormEvent) {
     e.preventDefault();
-    // @ts-ignore
-    initializePayment(onSuccess, onClose);
+    initializePayment(config);
   }
   return (
     <>

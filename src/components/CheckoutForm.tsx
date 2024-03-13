@@ -27,7 +27,7 @@ import { copyAmountToClipboard, getCurrencySign } from "@/lib/utils";
 import { CartContext } from "@/app/context/cartContext";
 import { Skeleton } from "./ui/skeleton";
 import { useRouter } from "next/navigation";
-import PayStackHookExample from "./PayStackHookExample";
+import PayStackHookExample from "./PayStackComponent";
 
 const deliveryFormSchema = z.object({
   fullName: z
@@ -575,23 +575,7 @@ export default function CheckoutForm({ user, email }: { user: string, email: str
                         <h1 className="text-3xl text-white font-semibold text-center md:py-2">
                           {getCurrencySign(amountToPay)}
                         </h1>
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button
-                                onClick={() =>
-                                  copyAmountToClipboard(amountToPay.toString())
-                                }
-                                className="bg-transparent self-end p-0"
-                              >
-                                <Copy size={18} color="white" />
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Copy amount</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
+                        
                       </div>
                     ) : (
                       <Skeleton className="my-4 w-40 h-5 bg-slate-50" />
@@ -709,13 +693,12 @@ export default function CheckoutForm({ user, email }: { user: string, email: str
                       </div>
                     </div>
                     <div className="flex items-center mt-8 gap-6">
-                      <PayStackHookExample isFormFilled={false} amount={amountToPay * 100} email={email}/>
-                      {/* <Button type="submit" className="">
-                        Submit
-                      </Button>
-                      <Button onClick={handleCancelPaymentForm}>Cancel</Button> */}
                     </div>
                   </form>
+                  <PayStackHookExample isFormFilled={false} amount={amountToPay * 100} email={email}/>
+                  <div className="mt-4">
+                    <p className="text-xs text-center text-slate-400">Please do not provide your real card details</p>
+                  </div>
                   
                 </div>
               </div>
