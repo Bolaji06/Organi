@@ -9,7 +9,7 @@ import { CheckoutTotalPaymentSkeleton, SummarySkeleton } from "./ui/checkout-ske
 export default function CheckOutSummary() {
   const [hasMount, setHasMount] = useState(false);
   const { cartItems, getTotalPriceWithQuantity, getTotalQuantity } = useContext(CartContext);
-  console.log(cartItems);
+  //console.log(cartItems);
 
   const deliveryFee = getTotalQuantity() * 200
   const subTotalPrice = getCurrencySign(getTotalPriceWithQuantity() * 100)
@@ -42,9 +42,9 @@ export default function CheckOutSummary() {
                   </div>
                   <div>
                     <h2 className="first-letter:uppercase font-semibold">{product.item.title}</h2>
-                    <p className="text-sm">{getCurrencySign(product.item.price * 100)}</p>
-                    <p className="font-bold text-sm">Quantity: {product.quantity}</p>
-                    <p>Delivery Fee: {product.quantity} X {getCurrencySign(200)}</p>
+                    <p className="text-sm"><span className="font-semibold">{getCurrencySign(product.item.price * 100)}</span></p>
+                    <p className="text-sm">Quantity: <span className="font-bold">{product.quantity}</span></p>
+                    <p className="text-sm">Delivery Fee: <span className="font-bold">{product.quantity} X {getCurrencySign(200)}</span></p>
                   </div>
                 </div>
               </div>

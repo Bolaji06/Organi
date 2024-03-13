@@ -26,6 +26,8 @@ import {
 import { copyAmountToClipboard, getCurrencySign } from "@/lib/utils";
 import { CartContext } from "@/app/context/cartContext";
 import { Skeleton } from "./ui/skeleton";
+import { useRouter } from "next/navigation";
+import PayStackHookExample from "./PayStackHookExample";
 
 const deliveryFormSchema = z.object({
   fullName: z
@@ -81,7 +83,7 @@ const cardSchema = z.object({
     }),
 });
 
-type CardFormType = {
+type cardFormType = {
   cardHolderName: string;
   cardNumber: string;
   expiryMonth: string;
@@ -89,18 +91,21 @@ type CardFormType = {
   cvv: string;
 };
 
-type FormErrorsType = Partial<Record<keyof CardFormType, string>>;
+type FormErrorsType = Partial<Record<keyof cardFormType, string>>;
 type DeliveryFormError = Partial<Record<keyof IForm, string>>;
 
-export default function CheckoutForm({ user }: { user: string }) {
+export default function CheckoutForm({ user, email }: { user: string, email: string }) {
   const [homeDelivery, setHomeDelivery] = useState(false);
   const [pickupDelivery, setPickupDelivery] = useState(false);
   const [paymentOnDelivery, setPaymentOnDelivery] = useState(false);
   const [paymentWithCard, setPaymentWithCard] = useState(false);
   const [openAddress, setOpenAddress] = useState(false);
   const [hasMount, setHasMount] = useState(false);
+  const [isPaymentcardFormFilled, setIsPaymentcardFormFilled] = useState(false);
+  const router = useRouter();
 
-  const { getTotalPriceWithQuantity, getTotalQuantity } = useContext(CartContext);
+  const { getTotalPriceWithQuantity, getTotalQuantity } =
+    useContext(CartContext);
   const deliveryFees = getTotalQuantity() * 200;
   const amountToPay = getTotalPriceWithQuantity() * 100 + deliveryFees;
 
@@ -127,7 +132,7 @@ export default function CheckoutForm({ user }: { user: string }) {
   const [deliveryFormError, setDeliveryFormError] = useState<DeliveryFormError>(
     {}
   );
-  const [cardForm, setCardFrom] = useState<CardFormType>({
+  const [cardForm, setCardFrom] = useState<cardFormType>({
     cardHolderName: "",
     cardNumber: "",
     expiryMonth: "",
@@ -155,13 +160,6 @@ export default function CheckoutForm({ user }: { user: string }) {
         [name]: value,
       };
     });
-  }
-  function handleCancelPaymentForm(){
-    setCardFrom((prevState) => {
-      return {
-        ...prevState
-      }
-    })
   }
 
   function onDeliveryFormSubmition(e: FormEvent) {
@@ -196,7 +194,7 @@ export default function CheckoutForm({ user }: { user: string }) {
         const formattedErrors: FormErrorsType = {};
         error.errors.forEach((err) => {
           if (err.path.length > 0) {
-            formattedErrors[err.path[0] as keyof CardFormType] = err.message;
+            formattedErrors[err.path[0] as keyof cardFormType] = err.message;
           }
         });
         setCardPaymentFormError(formattedErrors);
@@ -711,15 +709,14 @@ export default function CheckoutForm({ user }: { user: string }) {
                       </div>
                     </div>
                     <div className="flex items-center mt-8 gap-6">
-                      <Button type="submit" className="">
-                      Submit
-                    </Button>
-                    <Button onClick={handleCancelPaymentForm}>
-                        Cancel
-                    </Button>
+                      <PayStackHookExample isFormFilled={false} amount={amountToPay * 100} email={email}/>
+                      {/* <Button type="submit" className="">
+                        Submit
+                      </Button>
+                      <Button onClick={handleCancelPaymentForm}>Cancel</Button> */}
                     </div>
-                    
                   </form>
+                  
                 </div>
               </div>
             )}

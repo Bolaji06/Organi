@@ -8,6 +8,7 @@ import { currentUser } from "@clerk/nextjs";
 export default async function CheckoutPage() {
   const user = await currentUser();
   const firstName = user?.firstName || "";
+  const userEmail = user?.emailAddresses[0]?.emailAddress || "";
 
   return (
     <>
@@ -27,7 +28,7 @@ export default async function CheckoutPage() {
         <main className="mt-0">
           <section className="px-6 ">
             <section className="grid gap-5 lg:grid-cols-[3fr,1fr] mt-6 mb-10">
-              <CheckoutForm user={firstName} />
+              <CheckoutForm user={firstName} email={userEmail} />
               <div>
                 <CheckOutSummary />
               </div>
