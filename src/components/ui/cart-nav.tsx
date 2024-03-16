@@ -4,7 +4,6 @@ import { ShoppingCart, Heart, CircleUserRound } from "lucide-react";
 import Image from "next/image";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./hover-card";
 import { Button } from "./button";
-import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect, useContext, Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CartContext } from "@/app/context/cartContext";
@@ -64,61 +63,4 @@ export function LikeProduct() {
   );
 }
 
-export function UserAvatar() {
-  const { data: session, status } = useSession();
-  const userImage = session?.user?.image;
-  const username = session?.user?.name ?? "";
-  const userEmail = session?.user?.email ?? "";
 
-  const router = useRouter();
-
-  return (
-    <>
-      <HoverCard>
-        <HoverCardTrigger className="cursor-pointer">
-          {userImage ? (
-            <Image
-              src={userImage}
-              alt="User Profile"
-              width={100}
-              height={100}
-              className="w-8 h-8 rounded"
-            />
-          ) : (
-            <CircleUserRound color="black" size={26} />
-          )}
-        </HoverCardTrigger>
-        <HoverCardContent>
-          <div className="flex gap-6">
-            <div>
-              {userImage && (
-                <Image
-                  src={userImage}
-                  width={100}
-                  height={100}
-                  alt="User Image"
-                  className="w-8 h-8 rounded object-cover"
-                />
-              )}
-            </div>
-            <div>
-              <h3 className="font-semibold">{username}</h3>
-              <p className="py-1 text-sm">{userEmail}</p>
-            </div>
-          </div>
-          <div className="mt-2">
-            {status === "authenticated" ? (
-              <Button onClick={() => signOut()} className="w-full">
-                Sign Out
-              </Button>
-            ) : (
-              <Button onClick={() => router.push("/signin")} className="w-full">
-                Sign In
-              </Button>
-            )}
-          </div>
-        </HoverCardContent>
-      </HoverCard>
-    </>
-  );
-}

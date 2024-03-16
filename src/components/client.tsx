@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import { Button } from "./ui/button";
 import { ShoppingCart, Heart, Github } from "lucide-react";
-import { signIn } from "next-auth/react";
 import { useContext, useState } from "react";
 import Image from "next/image";
 import { useToast } from "./ui/use-toast";
@@ -15,19 +14,6 @@ type CartBtnProps = {
 
 // List of all NavBar Components
 // @ts-ignore
-export function GitHubLoginButton({ name, providerId }) {
-  return (
-    <>
-      <Button
-        className="w-full flex gap-2 font-semibold"
-        onClick={() => signIn(providerId, { callbackUrl: "/" })}
-      >
-        <Github color="black" />
-        {name}
-      </Button>
-    </>
-  );
-}
 
 //List of Products Details components
 export function AddToCartButton({ data }: CartBtnProps) {

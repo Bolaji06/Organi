@@ -8,8 +8,6 @@ import style from "./styles.module.css";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import "swiper/css";
-import "swiper/css/pagination";
 import clsx from "clsx";
 
 import { carouselHero } from "@/lib/carousel-data";

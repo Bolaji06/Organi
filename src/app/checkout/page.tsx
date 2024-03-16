@@ -32,7 +32,10 @@ export default async function CheckoutPage() {
         <main className="mt-0">
           <section className="px-6 ">
             <section className="grid gap-5 lg:grid-cols-[3fr,1fr] mt-6 mb-10">
-              <CheckoutForm user={firstName} email={userEmail} />
+              <div>
+                <CheckoutForm user={firstName} email={userEmail} />
+              </div>
+              
               <div>
                 <CheckOutSummary />
               </div>

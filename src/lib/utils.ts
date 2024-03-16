@@ -92,7 +92,7 @@ export function ignoreCase(word: string) {
  * 
  * @returns {{ from: string, to: string }} the ordered date and delivery date to
  */
-export function getDeliveryDate() {
+export function getDeliveryDate(): { from: string; to: string; } {
   const months = [
     "Jan",
     "Feb",
@@ -125,3 +125,4 @@ export function copyAmountToClipboard(amount: string){
     console.log('unable to copy');
   }
 }
+
