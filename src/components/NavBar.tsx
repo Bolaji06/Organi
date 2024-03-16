@@ -19,7 +19,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "./ui/drawer";
-import { LikeProduct, UserAvatar } from "./ui/cart-nav";
+import { LikeProduct } from "./ui/cart-nav";
 import CartDropdown from "./ui/cart-dropdown";
 import LikeDropdowmn from "./ui/like-dropdown";
 import { Suspense } from "react";
@@ -110,7 +110,7 @@ export default function NavBar(): React.ReactElement | null {
                       width={100}
                       height={100}
                     />
-                    <UserAvatar />
+                   
                   </div>
                   <div className="flex gap-4 items-center pt-4">
                     <LikeProduct />
