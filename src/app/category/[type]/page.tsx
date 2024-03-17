@@ -14,7 +14,11 @@ import {
 } from "@/lib/carousel-data";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Category"
+}
 export default async function CategoryPage({
   params,
 }: {

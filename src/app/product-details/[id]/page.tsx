@@ -7,7 +7,11 @@ import Breadcrumbs from "@/components/breadcrumbs";
 import Product from "@/components/Product";
 import RecentlyViewedProduct from "@/components/RecentlyViewed";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: 'Product Details'
+}
 export default async function ProductDetailsPage({
   params,
 }: {

@@ -1,6 +1,11 @@
 import { SignIn } from "@clerk/nextjs";
 import bg from "../../../../public/assets/login-bg.webp";
 import styles from './styles.module.css'
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Signin'
+}
 export default function SignInPage() {
   return (
     <>

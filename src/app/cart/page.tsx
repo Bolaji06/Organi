@@ -13,6 +13,7 @@ import CartSkeleton from "@/components/ui/cart-skeleton";
 import emptyCart from "../../../public/assets/empty-cart.png";
 import Image from "next/image";
 
+
 /**
  * This is a cart page that returns a
  * top navigation breadcrumb a loading UI skeleton if the page has

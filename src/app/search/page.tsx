@@ -3,7 +3,11 @@ import { searchProduct } from "../api/routes";
 import SearchResult from "@/components/SearchResult";
 import { Suspense } from "react";
 import SearchLoader from "./loading";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: 'Search'
+}
 export default async function SearchPage() {
   // const searchProd = await searchProduct()
 

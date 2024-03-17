@@ -5,7 +5,11 @@ import CheckoutForm from "@/components/CheckoutForm";
 import CheckOutSummary from "@/components/CheckoutSummary";
 import { currentUser } from "@clerk/nextjs";
 import Link from "next/link";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: 'Checkout'
+}
 export default async function CheckoutPage() {
   const user = await currentUser();
   const firstName = user?.firstName || "";
