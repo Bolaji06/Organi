@@ -9,8 +9,13 @@ import RecentlyViewedProduct from "@/components/RecentlyViewed";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: 'Product Details'
+export async function generateMetadata({ params }: { params: { id: number } }): Promise<Metadata>{
+  const productData = await getSingleProductDetail(params.id);
+
+  return {
+    title: productData.title,
+    description: productData.description
+  }
 }
 export default async function ProductDetailsPage({
   params,

@@ -15,10 +15,21 @@ import {
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { IProduct } from "@/lib/definitions";
 
-export const metadata: Metadata = {
-  title: "Category"
+export async function generateMetadata({
+  params,
+}: {
+  params: { type: string };
+}): Promise<Metadata> {
+
+  return {
+    title: params.type,
+    description: `Category for ${params.type}`
+  }
+
 }
+
 export default async function CategoryPage({
   params,
 }: {
@@ -27,7 +38,9 @@ export default async function CategoryPage({
   const productCategoryData = await getCategoryProduct(params.type);
   const products = productCategoryData?.products;
 
-  if (!products.length){
+  //console.log(products)
+
+  if (!products.length) {
     notFound();
   }
 
@@ -44,16 +57,16 @@ export default async function CategoryPage({
             gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
           }}
         >
-          {products.map((product: any) => {
+          {products.map((product: IProduct) => {
             return (
               <Link key={product.id} href={`/product-details/${product.id}`}>
                 <ProductCard
-                  id={product?.id}
-                  title={product?.title}
-                  price={product?.price}
-                  image={product?.images[0]}
-                  rate={product?.rating}
-                  discount={product?.discountPercentage}
+                  id={product.id}
+                  title={product.title}
+                  price={product.price}
+                  image={product.images[0]}
+                  rate={product.rating}
+                  discount={product.discountPercentage}
                 />
               </Link>
             );
