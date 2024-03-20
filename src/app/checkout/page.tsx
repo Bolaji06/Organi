@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import logo from "../../../public/logo.png.webp";
+import logo from "../../../public/organi_logo.png";
 import CheckoutForm from "@/components/CheckoutForm";
 import CheckOutSummary from "@/components/CheckoutSummary";
 import { currentUser } from "@clerk/nextjs";
@@ -18,16 +18,16 @@ export default async function CheckoutPage() {
   return (
     <>
       <main className="bg-slate-100 pb-6">
-        <header className="shadow-md px-4 lg:px-12 py-4 bg-white">
-          <div className="flex justify-evenly">
+        <header className="shadow-md py-4 bg-white">
+          <div className="flex justify-evenly items-center">
             <Link
             href={'/'}>
               <Image
                 src={logo}
                 alt="Organi logo"
-                width={200}
-                height={200}
-                className="w-20"
+                width={60}
+                height={60}
+                
               />
             </Link>
             <h1 className="text-2xl font-bold">Checkout</h1>

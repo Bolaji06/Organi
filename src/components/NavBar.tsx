@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../public/logo.png.webp";
+import logo from "../../public/organi_logo.png";
 
 import { links } from "@/lib/links";
 import { CircleUserRound, MenuSquare, MessagesSquareIcon } from "lucide-react";
@@ -45,10 +45,10 @@ export default function NavBar(): React.ReactElement | null {
 
   return (
     <>
-      <nav className="flex justify-between items-center px-6 lg:px-12 py-4">
+      <nav className="flex justify-between items-center px-6 lg:px-12 py-3">
         <div>
           <Link href={"/"}>
-            <Image src={logo} alt="Organi logo" width={100} height={100} />
+            <Image src={logo} alt="Organi logo" width={50} height={50} />
           </Link>
         </div>
 
@@ -107,8 +107,8 @@ export default function NavBar(): React.ReactElement | null {
                     <Image
                       src={logo}
                       alt="Organi Logo"
-                      width={100}
-                      height={100}
+                      width={50}
+                      height={50}
                     />
                    
                   </div>
