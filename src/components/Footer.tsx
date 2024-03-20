@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import logo from "../../public/logo.png.webp";
+import logo from "../../public/organi_logo.png";
 import { Link, PhoneCall, Twitter } from "lucide-react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -43,8 +43,8 @@ export default function Footer() {
               <Image
                 src={logo}
                 alt="Orgain footer logo"
-                width={100}
-                height={100}
+                width={70}
+                height={70}
               />
             </div>
 

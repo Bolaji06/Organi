@@ -201,7 +201,7 @@ export default async function AllProduct() {
             })}
           </div>
         </Carpet>
-        <InfiniteScrollLoader />
+        {/* <InfiniteScrollLoader /> */}
       </main>
     </>
   );
