@@ -22,13 +22,17 @@ export async function generateMetadata({
 }: {
   params: { type: string };
 }): Promise<Metadata> {
-
   return {
     title: params.type,
-    description: `Category for ${params.type}`
-  }
-
+    description: `Category for ${params.type}`,
+  };
 }
+// export async function generateStaticParams() {
+//   const category = await fetch("https://dummyjson.com/products/category");
+//   const response = await category.json();
+//   const products = response.products;
+//   return products.map((item: IProduct) => item.category)
+// }
 
 export default async function CategoryPage({
   params,

@@ -10,21 +10,21 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { IProduct } from "@/lib/definitions";
 
-export async function generateMetadata({ params }: { params: { id: number } }): Promise<Metadata>{
+// Generating a dynamic metadata for this page
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: number };
+}): Promise<Metadata> {
   const productData: IProduct = await getSingleProductDetail(params.id);
 
   return {
     title: productData.title,
-    description: productData.description
-  }
+    description: productData.description,
+  };
 }
 
-export async function generateStaticParams(){
-  const product = await fetch('https://dummyjson.com/products')
-  const response = await product.json();
-  const products = response.products;
-  return products.map((item: IProduct) => item.id)
-}
+
 export default async function ProductDetailsPage({
   params,
 }: {

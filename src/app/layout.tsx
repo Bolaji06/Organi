@@ -12,6 +12,7 @@ import { CartProvider } from "@/app/context/cartContext";
 const cairo = Cairo({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://organi-bice.vercel.app'),
   title: {
     default: 'Organi',
     template: '%s | Organi Store',

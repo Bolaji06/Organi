@@ -31,6 +31,7 @@ import { Suspense, useContext, useEffect, useState } from "react";
 import { CartContext } from "@/app/context/cartContext";
 import { IProduct } from "@/lib/definitions";
 
+
 /**
  * 
  * @param {Object} data - 

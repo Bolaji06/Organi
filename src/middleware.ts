@@ -1,9 +1,10 @@
 import { authMiddleware } from "@clerk/nextjs";
 
 export default authMiddleware({
-  // Routes that can be accessed while signed out
+  // Routes that can be accessed by both signed in and signed out user
   publicRoutes: ["/", "/all-category", 
-  "/category/:type", "/product-details/:id", "/search", "/cart"],
+  "/category/:type", "/product-details/:id", "/search",
+   "/cart", "/shop", "/contact", "/blog", "/category"],
 });
 
 // By this protects all our routes by default

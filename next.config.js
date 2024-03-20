@@ -21,4 +21,4 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
-//         "https://cdn.dummyjson.com/product-images/1/1.jpg"
+
