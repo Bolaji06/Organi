@@ -15,14 +15,8 @@ import { Input } from "./ui/input";
 
 import { object, z, ZodError } from "zod";
 
-import { Country, State, City, ICity } from "country-state-city";
+import { State, City,} from "country-state-city";
 import { IForm } from "@/lib/definitions";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
 import {
   copyAmountToClipboard,
   getCurrencySign,
@@ -30,11 +24,9 @@ import {
 } from "@/lib/utils";
 import { CartContext } from "@/app/context/cartContext";
 import { Skeleton } from "./ui/skeleton";
-import { useRouter } from "next/navigation";
-import PayStackHookExample from "./PayStackComponent";
+
+import PayStack from "./PayStackComponent";
 import TransactionSuccess from "./TransactionSuccess";
-import { resolve } from "path";
-import { rejects } from "assert";
 import { useToast } from "./ui/use-toast";
 import { SvgSpinnersEclipse } from "./client";
 
@@ -218,7 +210,7 @@ export default function CheckoutForm({
             state: "",
           });
         }
-      }, 5000);
+      }, 3000);
     });
   }
 
@@ -232,11 +224,9 @@ export default function CheckoutForm({
 
       const message = await simulatingFormSubmission(deliveryForm);
       setSubmittingStatus(message.message);
-      // Don't really understand how this part works tho :)
     } catch (error: any) {
       setSubmittingStatus(error);
       if (error instanceof ZodError) {
-        //console.log("Delivery form failed", error.errors);
         const formattedErrors: DeliveryFormError = {};
         error.errors.forEach((err) => {
           if (err.path.length > 0) {
@@ -293,6 +283,17 @@ export default function CheckoutForm({
   function handleCitySelection(e: ChangeEvent<HTMLSelectElement>) {
     setCityOption(e.target.value);
   }
+  function resetDeliveryForm(e: FormEvent) {
+    e.preventDefault();
+    setDeliveryForm({
+      fullName: "",
+      phoneNumber: "",
+      address: "",
+      lga: "",
+      state: "",
+    });
+  }
+  const isFormFilled = Object.values(cardForm).every(values => values.trim() !== '');
 
   const bgStyle = {
     background: "linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)",
@@ -305,7 +306,12 @@ export default function CheckoutForm({
         <section className="">
           <header className="flex gap-2 items-start py-2 px-3 border-b border-gray-300">
             <CheckCircle
-              color={isPickupStationSelected || Object.keys(userDeliveryDetails).length !== 0 ? "green" : "gray"}
+              color={
+                isPickupStationSelected ||
+                Object.keys(userDeliveryDetails).length !== 0
+                  ? "green"
+                  : "gray"
+              }
               size={19}
             />
             <div>
@@ -509,20 +515,21 @@ export default function CheckoutForm({
                             <div className="mt-4 flex items-center gap-4">
                               <Button
                                 type="submit"
-                                
                                 className="w-32 px-5 py-2 flex justify-center cursor-pointer
                            bg-transparent border-2 border-primary text-primary
                             transition-colors ease-linear duration-300
-                            lg:active:opacity-90
                            items-center rounded-md text-center font-semibold"
-                              >{isSubmit ? <SvgSpinnersEclipse />: "Submit"}</Button>
+                              >
+                                {isSubmit ? <SvgSpinnersEclipse /> : "Submit"}
+                              </Button>
 
-                              <Input
-                                type="reset"
-                                name="reset"
-                                className="w-32 flex justify-center items-center font-semibold
-                         text-white bg-red-600 hover:opacity-90 active:opacity-90 cursor-pointer"
-                              />
+                              <Button
+                                onClick={resetDeliveryForm}
+                                className="w-32 py-2 cursor-pointer
+                              bg-red-600 hover:opacity-90"
+                              >
+                                Reset
+                              </Button>
                             </div>
                           </form>
                         </div>
@@ -881,17 +888,12 @@ export default function CheckoutForm({
                           </div>
                           <div className="flex items-center mt-8 gap-6"></div>
                         </form>
-                        <PayStackHookExample
+                        <PayStack
                           setStatus={setTransactionStatus}
-                          isFormFilled={false}
+                          isFormFilled={isFormFilled}
                           amount={amountToPay * 100}
                           email={email}
                         />
-                        <div className="mt-4">
-                          <p className="text-xs text-center text-slate-400">
-                            Please do not provide your real card details
-                          </p>
-                        </div>
                       </div>
                     </div>
                   )}

@@ -1,8 +1,6 @@
-"use client";
 import { usePaystackPayment } from "react-paystack";
 import { Button } from "./ui/button";
 import { FormEvent } from "react";
-
 
 interface IReference {
   message: string,
@@ -48,7 +46,7 @@ export default function PayStackComponent({
   return (
     <>
       <main>
-        <Button disabled={isFormFilled} onClick={handleInitializePayment}>
+        <Button disabled={!isFormFilled} onClick={handleInitializePayment}>
           Make Payment
         </Button>
       </main>
