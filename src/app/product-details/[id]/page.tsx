@@ -24,7 +24,15 @@ export async function generateMetadata({
   };
 }
 
-
+// statically generate routes at build time instead of on-demand at request time.
+export async function generateStaticParams() {
+  const products = await fetch("https://dummyjson.com/products");
+  const response = await products.json();
+  const productList = response.products;
+  return productList.map((item: IProduct) => ({
+    id: item.id.toString()
+  })).slice(0, 10) // generate the first 10 items at build time
+}
 
 export default async function ProductDetailsPage({
   params,
