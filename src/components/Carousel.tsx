@@ -49,17 +49,14 @@ export function HeroCarousel({ autoScroll = false }) {
       {
         <section
           className="w-full
-                    bg-cover bg-center bg-no-repeat relative"
+                     relative"
         >
-          <Link href={"/#shop"}>
-            <Image
-              src={carouselHero[currentSlide].url}
-              alt="Hero Ads"
-              width={500}
-              height={500}
-              className="object-cover w-full h-[500px] transition-all ease-in-out duration-75"
-            />
-          </Link>
+          <Image
+            src={carouselHero[currentSlide].url}
+            alt="Hero Ads"
+            fill={true}
+            className="object-cover transition-all ease-in-out duration-75"
+          />
 
           <div
             className="flex items-center justify-between absolute w-full left-1/2 top-1/2

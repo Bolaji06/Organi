@@ -35,7 +35,7 @@ const deliveryFormSchema = z.object({
     .string()
     .min(2)
     .refine((val) => /^[a-zA-Z\s]+$/.test(val), {
-      message: "Fullname must contain only letter",
+      message: "Full name must contain only letter",
     }),
   phoneNumber: z
     .string()

@@ -1,20 +1,14 @@
-import TopLevel from "@/components/TopLevel";
-import { searchProduct } from "../api/routes";
 import SearchResult from "@/components/SearchResult";
-import { Suspense } from "react";
-import SearchLoader from "./loading";
 import { Metadata } from "next";
+import NavBar from "@/components/NavBar";
 
 export const metadata: Metadata = {
-  title: 'Search'
-}
-export default async function SearchPage() {
-  // const searchProd = await searchProduct()
-
+  title: "Search",
+};
+export default function SearchPage() {
   return (
     <>
       <main className="px-6">
-        <TopLevel isContact={false} />
         <div className="py-2 pb-32 px-4 bg-slate-100 mt-6 w-full">
           <SearchResult />
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Popsicle } from "lucide-react";
+import { Popsicle, Store, Truck } from "lucide-react";
 import {
   deliveryService,
   getCurrencySign,
@@ -30,7 +30,6 @@ import clsx from "clsx";
 import { Suspense, useContext, useEffect, useState } from "react";
 import { CartContext } from "@/app/context/cartContext";
 import { IProduct } from "@/lib/definitions";
-
 
 /**
  * 
@@ -161,91 +160,71 @@ export default function Product({
             </div>
 
             <div className="p-2 bg-white rounded-md basis-[30%]">
-              <h1 className="uppercase text-center text-sm border-b py-1 border-slate-200">
-                Delivery & return
-              </h1>
+              <div>
+                <h1 className="uppercase text-center text-sm border-b py-1 border-slate-200">
+                  Delivery & return
+                </h1>
 
-              <div className="px-2">
-                <div className="mt-2">
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select Delivery Service" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        {deliveryService.map((item: string) => {
-                          return (
-                            <SelectItem key={item} value={`${item}`}>
-                              {item}
-                            </SelectItem>
-                          );
-                        })}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="mt-2">
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select Location" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        {location.map((item: string) => {
-                          return (
-                            <SelectItem key={item} value={`${item}`}>
-                              {item}
-                            </SelectItem>
-                          );
-                        })}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="mt-8">
-                  <div className="flex justify-start items-start gap-6">
-                    <div className="border border-slate-500 p-2">
-                      <Popsicle size={22} />
+                <div className="px-2">
+                  <div className="mt-2">
+                    <div className="flex justify-start items-start gap-4">
+                      <div className=" p-2">
+                        <Store size={25} className="text-black/70" />
+                      </div>
+                      <div>
+                        <h2 className="font-semibold pb-1">Pickup Station</h2>
+                        <p className="text-sm">
+                          Delivery Fees:{" "}
+                          <span className="font-bold">
+                            {getCurrencySign(500)}
+                          </span>
+                        </p>
+                        <p className="text-sm">
+                          Arriving at pickup station between
+                          <span className="font-bold"> {from}</span> &{" "}
+                          <span className="font-bold"> {to}</span> when you
+                          order within next{" "}
+                          <span className="font-bold">18hrs 56mins</span>
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h2 className="font-semibold pb-1">Pickup Station</h2>
-                      <p className="text-sm">
-                        Delivery Fees:{" "}
-                        <span className="font-bold">
-                          {getCurrencySign(500)}
-                        </span>
-                      </p>
-                      <p className="text-sm">
-                        Arriving at pickup station between
-                        <span className="font-bold"> {from}</span> &{" "}
-                        <span className="font-bold"> {to}</span> when you order
-                        within next{" "}
-                        <span className="font-bold">18hrs 56mins</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex mt-8 justify-start items-start gap-6">
-                    <div className="border border-slate-500 p-2">
-                      <Popsicle size={22} />
-                    </div>
-                    <div>
-                      <h2 className="font-semibold pb-1">Home Delivery</h2>
-                      <p className="text-sm">
-                        Delivery Fees: <span className="font-bold">{getCurrencySign(850)}</span>
-                      </p>
-                      <p className="text-sm">
-                        Ready for delivery between
-                        <span className="font-bold"> {from}</span> &{" "}
-                        <span className="font-bold"> {to}</span> when you order
-                        within next{" "}
-                        <span className="font-bold">18hrs 56mins</span>
-                      </p>
+                    <div className="flex mt-8 justify-start items-start gap-4">
+                      <div className="p-2">
+                        <Truck size={25} className="text-black/70" />
+                      </div>
+                      <div>
+                        <h2 className="font-semibold pb-1">Home Delivery</h2>
+                        <p className="text-sm">
+                          Delivery Fees:{" "}
+                          <span className="font-bold">
+                            {getCurrencySign(850)}
+                          </span>
+                        </p>
+                        <p className="text-sm">
+                          Ready for delivery between
+                          <span className="font-bold"> {from}</span> &{" "}
+                          <span className="font-bold"> {to}</span> when you
+                          order within next{" "}
+                          <span className="font-bold">18hrs 56mins</span>
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <footer className="text-xs pt-6">
+                <p>
+                  <span className="font-bold">Delivery Policy</span>: We aim to deliver your orders within 3-5
+                  business days domestically and 7-14 business days
+                  internationally, though delivery times may vary.
+                </p>
+                <p className="py-4">
+                  <span className="font-bold">Return Policy</span>: You can return unused items in their original
+                  packaging within 30 days for a full refund or exchange;
+                  returns are typically processed within 5-7 business days of
+                  receipt.
+                </p>
+              </footer>
             </div>
           </div>
         </section>

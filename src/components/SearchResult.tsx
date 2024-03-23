@@ -19,7 +19,7 @@ export default function SearchResult() {
   const [error, setError] = useState("");
 
   const params = useSearchParams();
-  const query: any = params.get("query")?.toString();
+  const query = params.get("query")?.toString();
 
   useEffect(() => {
     const fetchData = async () => {

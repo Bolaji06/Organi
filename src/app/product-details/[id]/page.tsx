@@ -25,13 +25,24 @@ export async function generateMetadata({
 }
 
 // statically generate routes at build time instead of on-demand at request time.
+
+// USING generateStaticParams: generateStaticParams should
+// return an ARRAY of OBJECTS where each object represents
+// the populated dynamic segments of a single route.
+
+// Each property in the object is a dynamic segment to be filled in for the route.
+// The properties name is the segment's name, and the properties value is what that
+// segment should be filled in with.
 export async function generateStaticParams() {
   const products = await fetch("https://dummyjson.com/products");
   const response = await products.json();
   const productList = response.products;
-  return productList.map((item: IProduct) => ({
-    id: item.id.toString()
-  })).slice(0, 10) // generate the first 10 items at build time
+
+  return productList
+    .map((item: IProduct) => ({
+      id: item.id.toString(),
+    }))
+    .slice(0, 10); // generate the first 10 items at build time
 }
 
 export default async function ProductDetailsPage({

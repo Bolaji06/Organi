@@ -3,7 +3,7 @@ import { HeroCarousel } from "@/components/Carousel";
 import Category from "@/components/Category";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
-import TopLevel from "@/components/TopLevel";
+import { CategoryTab, SearchInput } from "@/components/TopLevel";
 import { auth, currentUser } from "@clerk/nextjs";
 import Image from "next/image";
 
@@ -13,8 +13,10 @@ export default async function Home() {
       <NavBar />
       <main className="px-4 lg:px-14">
         <section>
-          <TopLevel isContact={true} />
-          <div className="flex h-[431px] lg:ml-[1%] justify-end lg:mr-14 my-6">
+          <div className="flex gap-3 h-[431px]  justify-end my-6">
+            <div className="hidden lg:block">
+              <CategoryTab />
+            </div>
             <HeroCarousel autoScroll={true} />
           </div>
           <Category />

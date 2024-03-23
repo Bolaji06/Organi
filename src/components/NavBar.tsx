@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/organi_logo.png";
 
-import { links } from "@/lib/links";
+import { dropDownCategory, links } from "@/lib/links";
 import { CircleUserRound, MenuSquare, MessagesSquareIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -32,6 +32,7 @@ import {
   UserButton,
   useAuth,
 } from "@clerk/nextjs";
+import { SearchInput } from "./TopLevel";
 
 export default function NavBar(): React.ReactElement | null {
   const pathname = usePathname();
@@ -45,36 +46,21 @@ export default function NavBar(): React.ReactElement | null {
 
   return (
     <>
-      <nav className="flex justify-between items-center px-6 lg:px-12 py-3">
+      <nav className="flex justify-between items-center px-6 lg:px-12 py-3 lg:flex-nowrap flex-wrap">
         <div>
           <Link href={"/"}>
             <Image src={logo} alt="Organi logo" width={50} height={50} />
           </Link>
         </div>
 
-        <div
-          className={`hidden lg:flex items-center gap-12 text-black lg:uppercase font-extrabold
-                 text-sm tracking-[.2em]`}
-        >
-          {links.map((link) => {
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`${clsx("text-black", {
-                  "text-primary": pathname === link.href,
-                })}`}
-              >
-                {link.name}
-              </Link>
-            );
-          })}
+        <div className="order-1 w-full mt-3 lg:mt-0"> 
+          <SearchInput />
         </div>
 
-        <div className="flex gap-6 items-center">
+        <div className="flex gap-6 items-center lg:order-1">
           <div>
             <SignedIn>
-              <UserButton afterSignOutUrl="/"/>
+              <UserButton afterSignOutUrl="/" />
             </SignedIn>
 
             <SignedOut>
@@ -110,31 +96,35 @@ export default function NavBar(): React.ReactElement | null {
                       width={50}
                       height={50}
                     />
-                   
                   </div>
                   <div className="flex gap-4 items-center pt-4">
-                    <LikeProduct />
-                    {/* <CartDropdown /> */}
+                    
                   </div>
                 </DrawerTitle>
               </DrawerHeader>
 
-              <div className="flex flex-col gap-6 px-5 py-6">
-                {links.map((link) => {
-                  return (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      className={`text-black uppercase font-extrabold
-                                                text-sm ${clsx({
-                                                  "text-primary":
-                                                    pathname === link.href,
-                                                })}`}
-                    >
-                      {link.name}
-                    </Link>
-                  );
-                })}
+              <div className="h-[60%] overflow-y-auto px-4">
+              {dropDownCategory.map((category) => {
+              return (
+                <div
+                  key={category.name}
+                  className=" hover:bg-white cursor-pointer group py-2"
+                >
+                  <Link
+                    href={`/category/${category.href}`}
+                    className="w-full py-1 flex gap-3 items-center"
+                  >
+                    <category.icon
+                      size={20}
+                      className="text-black/80 group-hover:text-primary"
+                    />
+                    <p className="text-black/80 group-hover:text-primary group-hover:font-semibold">
+                      {category.name}
+                    </p>
+                  </Link>
+                </div>
+              );
+            })}
               </div>
 
               <DrawerFooter>

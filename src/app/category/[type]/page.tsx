@@ -27,12 +27,6 @@ export async function generateMetadata({
     description: `Category for ${params.type}`,
   };
 }
-// export async function generateStaticParams() {
-//   const category = await fetch("https://dummyjson.com/products/category");
-//   const response = await category.json();
-//   const products = response.products;
-//   return products.map((item: IProduct) => item.category)
-// }
 
 export default async function CategoryPage({
   params,
