@@ -7,8 +7,6 @@ import { resolve } from "path";
 export default async function AllCategoryProduct() {
   const allCategory = await getAllCategories();
 
-  await new Promise((resolve) => setTimeout(resolve, 5000))
-
   return (
     <>
       <main className="px-4 lg:px-14 bg-slate-100 pb-10">
