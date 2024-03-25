@@ -1,4 +1,4 @@
-import { Armchair, Brush, Glasses, Grape, Laptop, Shirt, Smartphone, SprayCan } from "lucide-react";
+import { Armchair, Brush, Diamond, Gem, Glasses, Grape, Laptop, Luggage, PaintRoller, Shirt, Smartphone, SprayCan } from "lucide-react";
 
 interface IDropdownItem {
   href: string,
@@ -70,6 +70,28 @@ export const dropDownCategory: TDropdownCategory = [
     href: 'furniture',
     name: 'Furniture',
     icon: Armchair,
-  }
+  },
+  {
+    href: 'womens-bags',
+    name: 'Women Bags',
+    icon: Luggage,
+  },
+  {
+    href: 'mens-shirts',
+    name: 'Men Shirt',
+    icon: Shirt,
+  },
+  {
+    href: "womens-jewellery",
+    name: 'Jewellery',
+    icon: Gem,
+  },
+  {
+    href: 'home-decoration',
+    name: 'Home Decoration',
+    icon: PaintRoller,
+  },
 
 ]
+export const cardSkeleton = ["card1", "card2", "card3", "card4", "card4",
+ "card4", "card4", "card4", "card4", "card4", "card4", "card4", "card4"];

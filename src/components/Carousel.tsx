@@ -119,18 +119,19 @@ export function AdsCarousel({ autoScroll = false, slides }: Carousel) {
   return (
     <>
       <div
-        className="w-full h-1/2 flex overflow-hidden
-             transition-transform ease-out duration-500"
+        className="w-full h-[200px] overflow-hidden
+             transition-transform ease-out duration-500
+             relative bg-cover bg-center"
       >
         {slides.map((slide, index) => {
           return (
             <Image
               key={index}
-              className="w-full object-cover h-60 "
+              className="object-cover"
               src={slides[currentSlide].src}
-              width={1000}
-              height={1000}
+              fill={true}
               alt="Jelwery Ads Banner"
+              
             />
           );
         })}

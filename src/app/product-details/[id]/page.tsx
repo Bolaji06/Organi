@@ -1,7 +1,6 @@
 import { getSingleProductDetail } from "@/app/api/routes";
 
 import { Suspense } from "react";
-import Loading from "./loading";
 
 import Breadcrumbs from "@/components/breadcrumbs";
 import Product from "@/components/Product";
@@ -70,10 +69,7 @@ export default async function ProductDetailsPage({
             ]}
           />
         </header>
-        <Suspense fallback={<Loading />}>
-          <Product data={productData} />
-        </Suspense>
-
+        <Product data={productData} />
         <RecentlyViewedProduct />
       </main>
     </>

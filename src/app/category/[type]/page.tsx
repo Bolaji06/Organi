@@ -36,8 +36,6 @@ export default async function CategoryPage({
   const productCategoryData = await getCategoryProduct(params.type);
   const products = productCategoryData?.products;
 
-  //console.log(products)
-
   if (!products.length) {
     notFound();
   }

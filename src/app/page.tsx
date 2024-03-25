@@ -14,7 +14,7 @@ export default async function Home() {
       <main className="px-4 lg:px-14">
         <section>
           <div className="flex gap-3 h-[431px]  justify-end my-6">
-            <div className="hidden lg:block">
+            <div className="hidden lg:block basis-[20%] shadow-md rounded-md px-3 py-1">
               <CategoryTab />
             </div>
             <HeroCarousel autoScroll={true} />

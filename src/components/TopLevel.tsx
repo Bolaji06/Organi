@@ -76,39 +76,30 @@ export function CategoryTab() {
   return (
     <>
       <section>
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            className="w-full flex items-center justify-around lg:justify-evenly gap-6 bg-primary lg:min-w-[20rem]
-                     py-3 text-white font-semibold tracking-widest lg:w-[200px]"
-          >
-            <Menu />
-            Trending Category
-            <ChevronDown />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="min-w-[300px] ">
-            {dropDownCategory.map((category) => {
-              return (
-                <DropdownMenuItem
-                  key={category.name}
-                  className=" hover:bg-white cursor-pointer group"
+        <div>
+          {dropDownCategory.map((category) => {
+            return (
+              <div
+                key={category.name}
+                className=" hover:bg-white cursor-pointer group"
+              >
+                <Link
+                  href={`/category/${category.href}`}
+                  className="w-full flex gap-3 items-center"
                 >
-                  <Link
-                    href={`/category/${category.href}`}
-                    className="w-full py-1 flex gap-3 items-center"
-                  >
-                    <category.icon
-                      size={20}
-                      className="text-black/80 group-hover:text-primary"
-                    />
-                    <p className="text-black/80 group-hover:text-primary group-hover:font-semibold">
-                      {category.name}
-                    </p>
-                  </Link>
-                </DropdownMenuItem>
-              );
-            })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+                  <category.icon
+                    size={20}
+                    className="text-black/80 group-hover:text-primary"
+                  />
+                  <p className="text-sm text-black/80 group-hover:text-primary
+                   group-hover:font-semibold group-hover:text-base py-[7px]">
+                    {category.name}
+                  </p>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
       </section>
     </>
   );

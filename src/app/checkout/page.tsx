@@ -8,27 +8,21 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Checkout'
-}
+  title: "Checkout",
+};
 export default async function CheckoutPage() {
   const user = await currentUser();
   const firstName = user?.firstName || "";
   const userEmail = user?.emailAddresses[0]?.emailAddress || "";
 
+
   return (
     <>
       <main className="bg-slate-100 pb-6">
-        <header className="shadow-md py-4 bg-white">
+        <header className="shadow-md py-1 lg:py-4 bg-white">
           <div className="flex justify-evenly items-center">
-            <Link
-            href={'/'}>
-              <Image
-                src={logo}
-                alt="Organi logo"
-                width={60}
-                height={60}
-                
-              />
+            <Link href={"/"}>
+              <Image src={logo} alt="Organi logo" width={60} height={60} />
             </Link>
             <h1 className="text-2xl font-bold">Checkout</h1>
           </div>
@@ -39,7 +33,7 @@ export default async function CheckoutPage() {
               <div>
                 <CheckoutForm user={firstName} email={userEmail} />
               </div>
-              
+
               <div>
                 <CheckOutSummary />
               </div>
