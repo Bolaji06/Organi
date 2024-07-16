@@ -21,8 +21,8 @@ export async function getCategoryProduct(category: string) {
 }
 export async function getSingleProductDetail(id: number) {
   try {
-    const productDetals = await fetch(`${URL}/${id}`);
-    return productDetals.json();
+    const productDetails = await fetch(`${URL}/${id}/?limit=194&skip=0`);
+    return productDetails.json();
   } catch (e) {
     console.log(e);
   }

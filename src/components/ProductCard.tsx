@@ -66,9 +66,9 @@ export function ProductCard({
               {title}
             </h3>
             {discount ? <p className="font-semibold">{discountFormat}</p> : ""}
-            <div className="flex gap-2  flex-col md:flex-row justify-between">
+            <div className="flex gap-2 flex-col md:flex-row justify-between">
               <p
-                className={`text-semibold ${clsx({
+                className={`text-semibold max-w-40 truncate ${clsx({
                   "line-through font-normal text-sm text-gray-400":
                     discount !== null,
                 })}`}

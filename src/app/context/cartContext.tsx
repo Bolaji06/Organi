@@ -122,7 +122,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     if (itemIndex !== -1) {
       const newCartItems = [...cartItems]; // create new cart items
       newCartItems.splice(itemIndex, 1); // Remove the item
-      setCartItems(newCartItems);
+      setCartItems(newCartItems);        
       setCartCounter(cartItems.length - 1);
     } else {
       // Item not in cart, handle accordingly

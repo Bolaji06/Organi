@@ -42,13 +42,14 @@ export default async function Category() {
                 <div className="absolute inset-0 bg-black/50" />
                 <Suspense fallback={<h2>Loading Category...</h2>}>
                   {firstFourItems.length > 0 && (
-                    <Link
-                      href={`category/${firstFourItems[index]}`}
-                      className="capitalize text-white font-semibold relative z-10 text-lg
-                                                    tracking-normal lg:tracking-nav"
-                    >
-                      {firstFourItems[index]}
-                    </Link>
+                    // <Link
+                    //   href={`category/${firstFourItems[index]}`}
+                    //   className="capitalize text-white font-semibold relative z-10 text-lg
+                    //                                 tracking-normal lg:tracking-nav"
+                    // >
+                    //   {firstFourItems[index]}
+                    // </Link>
+                    <Link href={"/"}></Link>
                   )}
                 </Suspense>
               </div>
